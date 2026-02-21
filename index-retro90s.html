@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sarthi Borkar - Professional Portfolio | 90s Retro Web Design">
+    <title>⚡ Sarthi Borkar | Digital Portfolio '95</title>
+
+    <!-- 90s Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* 90s Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 16px; height: 16px; }
+        ::-webkit-scrollbar-track {
+            background: #c0c0c0;
+            border: 2px solid #dfdfdf;
+            box-shadow: inset 1px 1px #b0b0b0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #808080;
+            border: 2px solid #dfdfdf;
+            box-shadow: inset -1px -1px #505050;
+        }
+
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #008080;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px),
+                linear-gradient(180deg, #008080 0%, #006666 100%);
+            color: #000;
+            min-height: 100vh;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='), auto;
+        }
+
+        /* Main Container */
+        .desktop {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Window Frame */
+        .window {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #f0f0f0 #808080 #808080 #f0f0f0;
+            box-shadow:
+                2px 2px 10px rgba(0,0,0,0.3),
+                inset 1px 1px #ffffff,
+                inset -1px -1px #808080;
+            margin: 0 auto 30px;
+            max-width: 1200px;
+        }
+
+        .window-header {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            padding: 3px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .window-title {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-icon {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(45deg, #ff0000, #ffff00);
+            display: inline-block;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .window-control {
+            width: 16px;
+            height: 16px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .window-control:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .window-content {
+            padding: 10px;
+            background: #ffffff;
+            border: 2px inset #c0c0c0;
+            margin: 2px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #f0f0f0 #808080 #808080 #f0f0f0;
+            padding: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #f0f0f0 #808080 #808080 #f0f0f0;
+            padding: 5px 15px;
+            font-family: 'Courier Prime', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            background: #dfdfdf;
+        }
+
+        .nav-button:active {
+            border-color: #808080 #f0f0f0 #f0f0f0 #808080;
+            transform: translate(1px, 1px);
+        }
+
+        .nav-button.active {
+            background: #000080;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+            border: 2px groove #c0c0c0;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-family: 'VT323', monospace;
+            font-size: 48px;
+            background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow 3s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .status-item {
+            background: #000;
+            color: #0f0;
+            padding: 5px 10px;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            border: 2px inset #808080;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #808080, #c0c0c0);
+            padding: 8px;
+            border: 2px solid;
+            border-color: #f0f0f0 #404040 #404040 #f0f0f0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: #000080;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .project-card {
+            background: #f0f0f0;
+            border: 3px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .project-card:active {
+            transform: translate(0, 0);
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .project-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #000080;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .tech-tag {
+            background: #ffff00;
+            padding: 2px 6px;
+            font-size: 12px;
+            border: 1px solid #000;
+        }
+
+        .project-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border: 2px solid #000;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(0, 255, 0, 0); }
+        }
+
+        /* Skills Section */
+        .skills-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: #e0e0e0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 10px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 20px;
+            background: #000;
+            border: 2px inset #808080;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #00ff00,
+                #00ff00 2px,
+                #00dd00 2px,
+                #00dd00 4px
+            );
+            animation: loading 2s ease-out;
+        }
+
+        @keyframes loading {
+            from { width: 0%; }
+        }
+
+        /* Contact Section */
+        .contact-form {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 5px;
+            border: 2px inset #808080;
+            background: #fff;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .form-input:focus {
+            outline: 1px dotted #000;
+        }
+
+        .submit-button {
+            background: #c0c0c0;
+            border: 3px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 8px 30px;
+            font-family: 'Courier Prime', monospace;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background: #d0d0d0;
+        }
+
+        .submit-button:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+            transform: translate(1px, 1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #000080;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid;
+            border-color: #ffffff #000040 #000040 #ffffff;
+            margin-top: 50px;
+        }
+
+        .visitor-counter {
+            background: #000;
+            color: #0f0;
+            padding: 5px 10px;
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            margin-top: 10px;
+            border: 2px inset #808080;
+        }
+
+        /* Marquee */
+        .marquee {
+            background: #ffff00;
+            padding: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            border: 2px solid #000;
+            margin: 20px 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #c0c0c0;
+            border: 3px solid;
+            border-color: #f0f0f0 #808080 #808080 #f0f0f0;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .nav-button { font-size: 12px; padding: 4px 10px; }
+        }
+
+        /* Retro Cursor */
+        a, button, .nav-button, .project-card {
+            cursor: pointer;
+        }
+
+        /* ASCII Art */
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1;
+            white-space: pre;
+            color: #00ff00;
+            background: #000;
+            padding: 10px;
+            border: 2px inset #808080;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop">
+        <!-- Main Window -->
+        <div class="window">
+            <div class="window-header">
+                <div class="window-title">
+                    <span class="window-icon"></span>
+                    Sarthi_Borkar_Portfolio.exe
+                </div>
+                <div class="window-controls">
+                    <button class="window-control">_</button>
+                    <button class="window-control">□</button>
+                    <button class="window-control">X</button>
+                </div>
+            </div>
+
+            <div class="window-content">
+                <!-- Navigation -->
+                <nav class="navbar">
+                    <a href="#home" class="nav-button active">HOME</a>
+                    <a href="#about" class="nav-button">ABOUT</a>
+                    <a href="#projects" class="nav-button">PROJECTS</a>
+                    <a href="#skills" class="nav-button">SKILLS</a>
+                    <a href="#experience" class="nav-button">EXPERIENCE</a>
+                    <a href="#contact" class="nav-button">CONTACT</a>
+                </nav>
+
+                <!-- Hero Section -->
+                <section id="home" class="hero">
+                    <h1>SARTHI BORKAR</h1>
+                    <p class="hero-subtitle">Full Stack Developer | Web3 Enthusiast | Digital Creator</p>
+                    <div class="status-bar">
+                        <div class="status-item">STATUS: ONLINE</div>
+                        <div class="status-item">YEAR: 2024</div>
+                        <div class="status-item">MODE: PROFESSIONAL</div>
+                    </div>
+                    <div class="marquee">
+                        <div class="marquee-content">
+                            🚀 Welcome to my digital portfolio! | 💻 Building the future, one line of code at a time | 🌐 Web3 & Blockchain Developer | 🎮 Interactive experiences creator |
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About Section -->
+                <section id="about" class="section">
+                    <div class="window">
+                        <div class="section-header">
+                            <div class="section-icon">👤</div>
+                            <div class="section-title">About.txt</div>
+                        </div>
+                        <div class="window-content">
+                            <div class="ascii-art">
+╔══════════════════════════════════════════════════════╗
+║                    ABOUT ME                          ║
+╚══════════════════════════════════════════════════════╝
+                            </div>
+                            <p style="padding: 20px; line-height: 1.6;">
+                                <strong>[PLACEHOLDER FOR YOUR BIO]</strong><br><br>
+                                Hello! I'm a passionate developer who loves creating innovative digital experiences.
+                                My journey in tech started with [YOUR JOURNEY]. I specialize in [YOUR SPECIALTIES].
+                                <br><br>
+                                Currently focused on: [YOUR CURRENT FOCUS]<br>
+                                Looking forward to: [YOUR GOALS]
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects Section -->
+                <section id="projects" class="section">
+                    <div class="window">
+                        <div class="section-header">
+                            <div class="section-icon">📁</div>
+                            <div class="section-title">Projects.exe</div>
+                        </div>
+                        <div class="window-content">
+                            <div class="projects-grid">
+                                <!-- Project 1 -->
+                                <div class="project-card" onclick="openProject(1)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_001</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">Web3</span>
+                                    </div>
+                                </div>
+
+                                <!-- Project 2 -->
+                                <div class="project-card" onclick="openProject(2)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_002</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">AI/ML</span>
+                                        <span class="tech-tag">TensorFlow</span>
+                                    </div>
+                                </div>
+
+                                <!-- Project 3 -->
+                                <div class="project-card" onclick="openProject(3)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_003</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Solidity</span>
+                                        <span class="tech-tag">Ethereum</span>
+                                        <span class="tech-tag">DeFi</span>
+                                    </div>
+                                </div>
+
+                                <!-- Project 4 -->
+                                <div class="project-card" onclick="openProject(4)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_004</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">TypeScript</span>
+                                        <span class="tech-tag">Next.js</span>
+                                        <span class="tech-tag">Tailwind</span>
+                                    </div>
+                                </div>
+
+                                <!-- Project 5 -->
+                                <div class="project-card" onclick="openProject(5)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_005</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Rust</span>
+                                        <span class="tech-tag">WebAssembly</span>
+                                        <span class="tech-tag">Performance</span>
+                                    </div>
+                                </div>
+
+                                <!-- Project 6 -->
+                                <div class="project-card" onclick="openProject(6)">
+                                    <div class="project-status"></div>
+                                    <div class="project-title">PROJECT_006</div>
+                                    <p>[Project Description Placeholder]</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Mobile</span>
+                                        <span class="tech-tag">React Native</span>
+                                        <span class="tech-tag">iOS/Android</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills Section -->
+                <section id="skills" class="section">
+                    <div class="window">
+                        <div class="section-header">
+                            <div class="section-icon">⚡</div>
+                            <div class="section-title">Skills.dll</div>
+                        </div>
+                        <div class="window-content">
+                            <div class="skills-container">
+                                <div class="skill-item">
+                                    <div class="skill-name">JavaScript/TypeScript</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%;"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">React/Next.js</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Node.js/Express</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Web3/Blockchain</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 75%;"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Python/AI</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 70%;"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Database/SQL</div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience Section -->
+                <section id="experience" class="section">
+                    <div class="window">
+                        <div class="section-header">
+                            <div class="section-icon">💼</div>
+                            <div class="section-title">Experience.log</div>
+                        </div>
+                        <div class="window-content">
+                            <div style="padding: 20px;">
+                                <div style="margin-bottom: 30px; padding: 15px; background: #f0f0f0; border-left: 5px solid #000080;">
+                                    <h3>POSITION_001 | Company Name</h3>
+                                    <p style="color: #666; margin: 5px 0;">Date Range: [START] - [END]</p>
+                                    <ul style="margin-top: 10px; padding-left: 20px;">
+                                        <li>[Achievement/Responsibility 1]</li>
+                                        <li>[Achievement/Responsibility 2]</li>
+                                        <li>[Achievement/Responsibility 3]</li>
+                                    </ul>
+                                </div>
+
+                                <div style="margin-bottom: 30px; padding: 15px; background: #f0f0f0; border-left: 5px solid #000080;">
+                                    <h3>POSITION_002 | Company Name</h3>
+                                    <p style="color: #666; margin: 5px 0;">Date Range: [START] - [END]</p>
+                                    <ul style="margin-top: 10px; padding-left: 20px;">
+                                        <li>[Achievement/Responsibility 1]</li>
+                                        <li>[Achievement/Responsibility 2]</li>
+                                        <li>[Achievement/Responsibility 3]</li>
+                                    </ul>
+                                </div>
+
+                                <div style="margin-bottom: 30px; padding: 15px; background: #f0f0f0; border-left: 5px solid #000080;">
+                                    <h3>POSITION_003 | Company Name</h3>
+                                    <p style="color: #666; margin: 5px 0;">Date Range: [START] - [END]</p>
+                                    <ul style="margin-top: 10px; padding-left: 20px;">
+                                        <li>[Achievement/Responsibility 1]</li>
+                                        <li>[Achievement/Responsibility 2]</li>
+                                        <li>[Achievement/Responsibility 3]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section id="contact" class="section">
+                    <div class="window">
+                        <div class="section-header">
+                            <div class="section-icon">📧</div>
+                            <div class="section-title">Contact.frm</div>
+                        </div>
+                        <div class="window-content">
+                            <div class="contact-form">
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label class="form-label">NAME:</label>
+                                        <input type="text" class="form-input" placeholder="Enter your name...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">EMAIL:</label>
+                                        <input type="email" class="form-input" placeholder="your@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">SUBJECT:</label>
+                                        <input type="text" class="form-input" placeholder="Project inquiry...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">MESSAGE:</label>
+                                        <textarea class="form-input" rows="5" placeholder="Type your message here..."></textarea>
+                                    </div>
+                                    <button type="submit" class="submit-button">SEND MESSAGE</button>
+                                </form>
+
+                                <div style="margin-top: 30px; text-align: center;">
+                                    <p><strong>Or connect with me on:</strong></p>
+                                    <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                                        <a href="#" class="nav-button">GitHub</a>
+                                        <a href="#" class="nav-button">LinkedIn</a>
+                                        <a href="#" class="nav-button">Twitter</a>
+                                        <a href="#" class="nav-button">Email</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 1995-2024 Sarthi Borkar | All Rights Reserved</p>
+            <p style="margin-top: 10px;">Best viewed in Netscape Navigator 3.0+ at 800x600 resolution</p>
+            <div class="visitor-counter">
+                VISITOR #<span id="visitorCount">000000</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="window-header">
+                <div class="window-title">
+                    <span class="window-icon"></span>
+                    <span id="modalTitle">Project Details</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-control" onclick="closeModal()">X</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div id="modalContent" style="padding: 20px;">
+                    <!-- Project details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 90s Retro JavaScript
+        console.log('%c Welcome to the 90s! ', 'background: #000080; color: #00ff00; font-size: 20px; font-family: "Courier New"');
+
+        // Visitor Counter
+        let visitorCount = localStorage.getItem('visitorCount') || 0;
+        visitorCount++;
+        localStorage.setItem('visitorCount', visitorCount);
+        document.getElementById('visitorCount').textContent = String(visitorCount).padStart(6, '0');
+
+        // Navigation
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Project Modal
+        function openProject(projectId) {
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            // Project data placeholder
+            const projects = {
+                1: {
+                    title: 'PROJECT_001',
+                    description: '[Detailed project description]',
+                    tech: 'React, Node.js, Web3',
+                    link: '#',
+                    github: '#'
+                },
+                2: {
+                    title: 'PROJECT_002',
+                    description: '[Detailed project description]',
+                    tech: 'Python, AI/ML, TensorFlow',
+                    link: '#',
+                    github: '#'
+                },
+                3: {
+                    title: 'PROJECT_003',
+                    description: '[Detailed project description]',
+                    tech: 'Solidity, Ethereum, DeFi',
+                    link: '#',
+                    github: '#'
+                },
+                4: {
+                    title: 'PROJECT_004',
+                    description: '[Detailed project description]',
+                    tech: 'TypeScript, Next.js, Tailwind',
+                    link: '#',
+                    github: '#'
+                },
+                5: {
+                    title: 'PROJECT_005',
+                    description: '[Detailed project description]',
+                    tech: 'Rust, WebAssembly, Performance',
+                    link: '#',
+                    github: '#'
+                },
+                6: {
+                    title: 'PROJECT_006',
+                    description: '[Detailed project description]',
+                    tech: 'Mobile, React Native, iOS/Android',
+                    link: '#',
+                    github: '#'
+                }
+            };
+
+            const project = projects[projectId];
+            modalTitle.textContent = project.title;
+            modalContent.innerHTML = `
+                <h2>${project.title}</h2>
+                <p style="margin: 20px 0;">${project.description}</p>
+                <p><strong>Technologies:</strong> ${project.tech}</p>
+                <div style="margin-top: 20px;">
+                    <a href="${project.link}" class="nav-button">View Live</a>
+                    <a href="${project.github}" class="nav-button">GitHub</a>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('active');
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('MESSAGE SENT! (This is a demo - configure your email service)');
+        });
+
+        // Window Controls
+        document.querySelectorAll('.window-control').forEach((control, index) => {
+            control.addEventListener('click', function() {
+                if (index === 2) { // Close button
+                    alert('Thanks for visiting! Come back soon!');
+                } else if (index === 1) { // Maximize
+                    document.body.requestFullscreen();
+                } else { // Minimize
+                    alert('Minimize function not available in browser :)');
+                }
+            });
+        });
+
+        // Smooth scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(section);
+        });
+
+        // Retro Loading Effect
+        window.addEventListener('load', function() {
+            console.log('Page loaded successfully!');
+
+            // Animate skill bars on load
+            setTimeout(() => {
+                document.querySelectorAll('.skill-fill').forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0%';
+                    setTimeout(() => {
+                        fill.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+
+        // Easter Egg: Konami Code
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+
+            if (konamiCode.join(',') === konamiPattern.join(',')) {
+                alert('🎮 KONAMI CODE ACTIVATED! You found the easter egg!');
+                document.body.style.animation = 'rainbow 2s linear infinite';
+            }
+        });
+    </script>
+</body>
+</html>

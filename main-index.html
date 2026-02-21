@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sarthi Borkar - Blockchain, AI/XR, Research, Operations | Web3 Developer & Researcher in Berlin">
+    <title>Sarthi Borkar | Web3 Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           CSS VARIABLES
+           ======================================== */
+        :root {
+            /* Dark Mode - Gothic Batman Gamer */
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --color-primary: #00ff41;
+            --color-secondary: #ff006e;
+            --color-accent: #00d9ff;
+            --color-text: #f0f0f0;
+            --color-text-dim: #a0a0a0;
+            --color-border: #00ff41;
+            --color-shadow: #003d1a;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+
+            /* Typography */
+            --font-pixel: 'Press Start 2P', monospace;
+            --font-mono: 'VT323', monospace;
+            --font-serif: 'Crimson Text', 'Noto Serif JP', serif;
+            --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+            --font-size-xs: 0.6rem;
+            --font-size-sm: 0.8rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.5rem;
+            --font-size-xl: 2rem;
+
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Light Mode - Flowing & Spacious */
+        [data-theme="light"] {
+            --bg-primary: #f7f9fb;
+            --bg-secondary: rgba(255, 255, 255, 0.6);
+            --color-primary: #3b82f6;
+            --color-secondary: #8b5cf6;
+            --color-accent: #06b6d4;
+            --color-text: #1e293b;
+            --color-text-dim: #64748b;
+            --color-border: rgba(59, 130, 246, 0.1);
+            --color-shadow: rgba(0, 0, 0, 0.03);
+
+            --gradient-start: #f7f9fb;
+            --gradient-end: #eff6ff;
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background-color: var(--bg-primary);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-smooth), color var(--transition-smooth);
+            position: relative;
+        }
+
+        /* Light mode body styling - Flowing & Spacious */
+        [data-theme="light"] body {
+            font-family: var(--font-sans);
+            background: linear-gradient(180deg, #f7f9fb 0%, #eff6ff 50%, #f7f9fb 100%);
+            line-height: 1.8;
+        }
+
+        /* Subtle ambient light effect */
+        [data-theme="light"] body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            right: -10%;
+            bottom: -10%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Hide mountains in light mode */
+        .light-bg-mountains {
+            display: none;
+        }
+
+        /* Image rendering */
+        img {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            max-width: 100%;
+            height: auto;
+        }
+
+        [data-theme="light"] img {
+            image-rendering: auto;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border: 2px solid var(--bg-primary);
+            transition: background var(--transition-fast);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* Content wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================================
+           NAVIGATION BAR
+           ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-primary);
+            border-bottom: 4px solid var(--color-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-smooth);
+        }
+
+        [data-theme="light"] .navbar {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .navbar-brand {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-sm);
+            color: var(--color-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color var(--transition-normal);
+        }
+
+        [data-theme="light"] .navbar-brand {
+            font-family: var(--font-serif);
+            text-transform: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-md);
+        }
+
+        .navbar-menu li a {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--color-text);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 2px solid transparent;
+            transition: all var(--transition-fast);
+            display: inline-block;
+        }
+
+        [data-theme="light"] .navbar-menu li a {
+            font-family: var(--font-sans);
+            text-transform: capitalize;
+            font-weight: 500;
+        }
+
+        .navbar-menu li a:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .navbar-menu li a:hover {
+            box-shadow: none;
+            transform: translateY(-2px);
+        }
+
+        .navbar-menu li a.active {
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            background-color: var(--bg-secondary);
+        }
+
+        /* Theme Toggle Button - iOS Style */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border-radius: 30px;
+            border: 2px solid var(--color-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .theme-toggle::before {
+            content: '☀️';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            transition: opacity var(--transition-normal);
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            transition: transform var(--transition-normal);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .theme-toggle::before {
+            content: '🌙';
+            left: auto;
+            right: 5px;
+        }
+
+        [data-theme="light"] .theme-toggle::after {
+            transform: translateX(28px);
+            background: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-md);
+            background: none;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            cursor: pointer;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .navbar-toggle:hover {
+            background-color: var(--color-primary);
+            color: var(--bg-primary);
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Scanline effect - dark mode only */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 65, 0.03) 0px,
+                rgba(0, 255, 65, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        [data-theme="light"] .hero::before {
+            display: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: var(--font-pixel);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+            text-shadow: 4px 4px 0 var(--color-shadow);
+            animation: glitch 3s infinite;
+        }
+
+        [data-theme="light"] .hero-title {
+            font-family: var(--font-serif);
+            text-shadow: none;
+            animation: none;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0, 0); }
+            91% { transform: translate(-2px, -2px); }
+            92% { transform: translate(2px, 2px); }
+            93% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        [data-theme="light"] .hero-subtitle {
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+            color: var(--color-text-dim);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        [data-theme="light"] .hero-description {
+            font-family: var(--font-sans);
+        }
+
+        .hero-avatar {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto var(--spacing-md);
+            border: 4px solid var(--color-primary);
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--color-primary);
+            transition: all var(--transition-smooth);
+        }
+
+        [data-theme="light"] .hero-avatar {
+            border-radius: 50%;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-avatar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid var(--color-accent);
+            opacity: 0;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.95); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: var(--font-size-lg);
+            color: var(--color-primary);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ========================================
+           SECTION STYLES
+           ======================================== */
+        section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        [data-theme="light"] section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-pixel);
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+        }
+
+        [data-theme="light"] .section-title {
+            font-family: var(--font-serif);
+            text-transform: none;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--color-secondary);
+            box-shadow: 0 0 10px var(--color-secondary);
+        }
+
+        [data-theme="light"] .section-title::after {
+            box-shadow: none;
+            border-radius: 4px;
+            height: 3px;
+            width: 60px;
+            opacity: 0.3;
+        }
+
+        /* ========================================
+           ABOUT SECTION
+           ======================================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .about-text p {
+            font-family: var(--font-mono);
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-border);
+            background: var(--bg-secondary);
+            transition: all var(--transition-smooth);
+        }
+
+        [data-theme="light"] .about-text p {
+            font-family: var(--font-sans);
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem;
+        }
+
+        /* Expandable about section */
+        .about-collapsed {
+            max-height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-expanded {
+            max-height: none;
+        }
+
+        .about-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            pointer-events: none;
+        }
+
+        .about-expanded .about-fade {
+            display: none;
+        }
+
+        .about-hidden {
+            display: none;
+        }
+
+        .about-expanded .about-hidden {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-highlights {
+            list-style: none;
+            margin: var(--spacing-md) 0;
+            padding-left: 0;
+        }
+
+        .about-highlights li {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+
+        [data-theme="light"] .about-highlights li {
+            font-family: var(--font-sans);
+        }
+
+        .about-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        [data-theme="light"] .about-highlights li::before {
+            content: '✦';
+        }
+
+        .learn-more-btn {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--bg-primary);
+            background: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin: var(--spacing-md) auto;
+            display: block;
+        }
+
+        [data-theme="light"] .learn-more-btn {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: capitalize;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 2px 15px rgba(59, 130, 246, 0.2);
+            padding: 0.875rem 2rem;
+        }
+
+        .learn-more-btn:hover {
+            background: transparent;
+            color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .skill-item {
+            padding: var(--spacing-md);
+            border: 3px solid var(--color-primary);
+            background: var(--bg-secondary);
+            transition: all var(--transition-normal);
+        }
+
+        [data-theme="light"] .skill-item {
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--color-primary);
+        }
+
+        [data-theme="light"] .skill-item:hover {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .skill-name {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+        }
+
+        [data-theme="light"] .skill-name {
+            font-family: var(--font-serif);
+            text-transform: none;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--bg-primary);
+            border: 2px solid var(--color-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .skill-bar {
+            border-radius: 10px;
+            border: none;
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+            transition: width 1s ease;
+        }
+
+        [data-theme="light"] .skill-progress {
+            box-shadow: none;
+            border-radius: 10px;
+        }
+
+        /* ========================================
+           TIMELINE SECTION
+           ======================================== */
+        .timeline {
+            position: relative;
+            padding: var(--spacing-md) 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--color-primary);
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .timeline::before {
+            background: var(--color-primary);
+            width: 2px;
+            box-shadow: none;
+        }
+
+        .timeline-item {
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-content {
+            width: calc(50% - var(--spacing-lg));
+            padding: var(--spacing-md);
+            border: 3px solid var(--color-accent);
+            background: var(--bg-secondary);
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+
+        [data-theme="light"] .timeline-content {
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--color-accent);
+        }
+
+        [data-theme="light"] .timeline-content:hover {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            transform: scale(1.02);
+        }
+
+        .timeline-year {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-sm);
+            color: var(--color-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        [data-theme="light"] .timeline-year {
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        [data-theme="light"] .timeline-title {
+            font-family: var(--font-serif);
+            text-transform: none;
+            font-size: 1.1rem;
+        }
+
+        .timeline-description {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
+
+        [data-theme="light"] .timeline-description {
+            font-family: var(--font-sans);
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .tag {
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            padding: 4px 8px;
+            text-transform: uppercase;
+        }
+
+        [data-theme="light"] .tag {
+            font-family: var(--font-sans);
+            text-transform: none;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border-width: 1px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--color-secondary);
+            border: 4px solid var(--bg-primary);
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 10px var(--color-secondary);
+        }
+
+        [data-theme="light"] .timeline-dot {
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-primary);
+        }
+
+        /* ========================================
+           BLOG SECTION
+           ======================================== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .blog-card {
+            border: 3px solid var(--color-primary);
+            background: var(--bg-secondary);
+            padding: var(--spacing-md);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .blog-card {
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--color-primary);
+            border-color: var(--color-secondary);
+        }
+
+        [data-theme="light"] .blog-card:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .blog-date {
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--color-text-dim);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        [data-theme="light"] .blog-date {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+        }
+
+        .blog-title {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        [data-theme="light"] .blog-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+        }
+
+        .blog-excerpt {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--color-text);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        [data-theme="light"] .blog-excerpt {
+            font-family: var(--font-sans);
+        }
+
+        .blog-button {
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--bg-primary);
+            background: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        [data-theme="light"] .blog-button {
+            font-family: var(--font-sans);
+            text-transform: capitalize;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.9rem;
+            padding: 0.625rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .blog-button:hover {
+            background: transparent;
+            color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .blog-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ========================================
+           GAME SECTION
+           ======================================== */
+        #game {
+            background: var(--bg-secondary);
+            border-top: 4px solid var(--color-primary);
+            border-bottom: 4px solid var(--color-primary);
+        }
+
+        [data-theme="light"] #game {
+            background: var(--bg-secondary);
+            border-width: 1px;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .game-description {
+            font-family: var(--font-mono);
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--color-text-dim);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        [data-theme="light"] .game-description {
+            font-family: var(--font-sans);
+        }
+
+        #gameCanvas {
+            border: 4px solid var(--color-primary);
+            background: var(--bg-primary);
+            display: block;
+            margin: 0 auto var(--spacing-md);
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--color-primary);
+        }
+
+        [data-theme="light"] #gameCanvas {
+            border-radius: 12px;
+            border-width: 2px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+
+        .game-button {
+            font-family: var(--font-pixel);
+            font-size: var(--font-size-xs);
+            color: var(--bg-primary);
+            background: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        [data-theme="light"] .game-button {
+            font-family: var(--font-sans);
+            text-transform: capitalize;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .game-button:hover {
+            background: transparent;
+            color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        [data-theme="light"] .game-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-button:active {
+            transform: scale(0.95);
+        }
+
+        .game-stats {
+            font-family: var(--font-mono);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--color-accent);
+            margin-top: var(--spacing-md);
+        }
+
+        [data-theme="light"] .game-stats {
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+
+        .game-instructions {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--color-text-dim);
+            margin-top: var(--spacing-sm);
+        }
+
+        [data-theme="light"] .game-instructions {
+            font-family: var(--font-sans);
+        }
+
+        /* ========================================
+           FOOTER SECTION
+           ======================================== */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 4px solid var(--color-primary);
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            position: relative;
+        }
+
+        [data-theme="light"] footer {
+            border-top-width: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--color-primary);
+            background: var(--bg-primary);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            color: var(--color-primary);
+        }
+
+        [data-theme="light"] .social-link {
+            border-radius: 12px;
+            border-width: 2px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--color-primary);
+            transition: fill var(--transition-fast);
+        }
+
+        .social-link:hover {
+            background: var(--color-primary);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--color-primary);
+        }
+
+        [data-theme="light"] .social-link:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover svg {
+            fill: var(--bg-primary);
+        }
+
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            color: var(--color-text-dim);
+            margin-top: var(--spacing-md);
+        }
+
+        [data-theme="light"] .footer-text {
+            font-family: var(--font-sans);
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                border-top: 2px solid var(--color-primary);
+                padding: var(--spacing-sm);
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .theme-toggle {
+                width: 50px;
+                height: 26px;
+            }
+
+            .theme-toggle::after {
+                width: 18px;
+                height: 18px;
+            }
+
+            [data-theme="light"] .theme-toggle::after {
+                transform: translateX(22px);
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-content {
+                width: calc(100% - var(--spacing-lg));
+                margin-left: var(--spacing-lg) !important;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(-50%);
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Light mode background elements -->
+    <div class="light-bg-mountains">
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <!-- ========================================
+             NAVIGATION BAR
+             ======================================== -->
+        <nav class="navbar">
+            <a href="#home" class="navbar-brand">Sarthi Borkar</a>
+            <div class="navbar-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme"></button>
+                <button class="navbar-toggle" id="navToggle">☰</button>
+                <ul class="navbar-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#work" class="nav-link">Work</a></li>
+                    <li><a href="#blog" class="nav-link">Research</a></li>
+                    <li><a href="#game" class="nav-link">Game</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- ========================================
+             HERO SECTION
+             ======================================== -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-avatar">
+                    <img src="assets/images/nft.jpg" alt="Sarthi Borkar NFT Avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 5rem; color: var(--color-primary);\'>SB</div>'">
+                </div>
+                <h1 class="hero-title">SARTHI BORKAR</h1>
+                <p class="hero-subtitle">Blockchain | AI/XR | Research | Operations</p>
+                <p class="hero-description">i Code. i Build. i Connect.</p>
+                <p class="hero-description" style="font-size: clamp(0.8rem, 2vw, 1.2rem); margin-top: -1rem;">Your most active guy in the web3 ecosystem</p>
+                <p class="hero-description" style="font-size: clamp(0.7rem, 1.8vw, 1rem); color: var(--color-accent); margin-top: -1rem;">📍 Berlin, Germany</p>
+            </div>
+            <div class="scroll-indicator">▼</div>
+        </section>
+
+        <!-- ========================================
+             ABOUT SECTION
+             ======================================== -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hey there! I'm Sarthi Borkar, a Computer Science student at the International University of Applied Sciences in Berlin with 3+ years of hands-on experience in blockchain, AI, and extended reality (XR) development.
+                    </p>
+
+                    <ul class="about-highlights">
+                        <li>3+ years in Blockchain, AI & XR development</li>
+                        <li>Developer Advocate & Community Builder</li>
+                        <li>Smart Contract & Cross-chain Protocol Expert</li>
+                        <li>Open-source Contributor & Researcher</li>
+                        <li>Berlin-based | International Protocols</li>
+                    </ul>
+
+                    <button class="learn-more-btn" id="learnMoreBtn">Learn More →</button>
+
+                    <div class="about-hidden" id="aboutHidden">
+                        <p>
+                            I'm passionate about building at the intersection of Web3, DeFi, and emerging technologies. From developing smart contracts and cross-chain protocols to creating XR experiences, I thrive on solving complex problems and sharing knowledge with the community.
+                        </p>
+                        <p>
+                            Currently, I'm diving deep into TON Blockchain, contributing to open-source projects, and continuously expanding my skillset in AI and blockchain infrastructure. When I'm not coding, you'll find me organizing community events, conducting workshops, or exploring the latest in decentralized technology.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-name">Solidity/Rust</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Python/TypeScript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">DeFi Protocols</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">XR/Unity</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">React/Node.js</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">DevOps/AWS</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             PROOF OF WORK / TIMELINE SECTION
+             ======================================== -->
+        <section id="work">
+            <h2 class="section-title">Proof of Work</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-title">Events Lead – Bitget Builder</div>
+                        <div class="timeline-description">
+                            Organizing and hosting community events across EU, handling key sponsorships with L1s/L2s as a builder.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Events</span>
+                            <span class="tag">Community</span>
+                            <span class="tag">Web3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-title">Blockchain Fundamentals Certification</div>
+                        <div class="timeline-description">
+                            Completed comprehensive blockchain fundamentals course (Nov 2025).
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Certification</span>
+                            <span class="tag">Blockchain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024-2025</div>
+                        <div class="timeline-title">Head of Operations – DXB.Care</div>
+                        <div class="timeline-description">
+                            Managed concierge services for blockchain investors; coordinated schedules, tasks, and client communication using Notion.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Operations</span>
+                            <span class="tag">Management</span>
+                            <span class="tag">Blockchain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024-2025</div>
+                        <div class="timeline-title">Full Stack Web3 Developer – Feeflex Labs</div>
+                        <div class="timeline-description">
+                            Building decentralized applications and Web3 infrastructure.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Development</span>
+                            <span class="tag">Web3</span>
+                            <span class="tag">FullStack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023-2024</div>
+                        <div class="timeline-title">Developer Advocate – Router Protocol</div>
+                        <div class="timeline-description">
+                            Led workshops and created onboarding resources for cross-chain DeFi protocol; contributed to documentation and smart contract samples (Rust, AssemblyScript).
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">DevRel</span>
+                            <span class="tag">DeFi</span>
+                            <span class="tag">CrossChain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-title">Ambassador Developer – Push Protocol</div>
+                        <div class="timeline-description">
+                            Built dApps and educated developers on blockchain communication protocol; organized meetups and training sessions.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Development</span>
+                            <span class="tag">Education</span>
+                            <span class="tag">dApps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-title">Polkadot Blockchain Academy Graduate</div>
+                        <div class="timeline-description">
+                            Completed intensive blockchain development program.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Education</span>
+                            <span class="tag">Polkadot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             BLOG SECTION
+             ======================================== -->
+        <section id="blog">
+            <h2 class="section-title">Research Log</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">SIMD-0204: Solana Improvement Document Analysis</h3>
+                    <p class="blog-excerpt">
+                        Deep dive into Solana's reward distribution mechanisms and protocol improvements.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">Solana</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Protocol</span>
+                    </div>
+                    <br><br>
+                    <a href="https://simd204.hashnode.dev/" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">Walrus for Rookies: Beginner's Guide</h3>
+                    <p class="blog-excerpt">
+                        Comprehensive guide to understanding and using Walrus storage protocol.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">Tutorial</span>
+                        <span class="tag">Web3</span>
+                        <span class="tag">Storage</span>
+                    </div>
+                    <br><br>
+                    <a href="https://walrus.hashnode.dev/" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">Stablecoin vs Bridges: Research Paper</h3>
+                    <p class="blog-excerpt">
+                        Comparative analysis of stablecoin mechanisms and cross-chain bridge protocols.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">Research</span>
+                        <span class="tag">DeFi</span>
+                        <span class="tag">Bridges</span>
+                    </div>
+                    <br><br>
+                    <a href="https://docs.google.com/document/d/1sBazhovuY8rDlzzblVDCa7EgAkO3-4fdz9K4Cdve47Y/edit?usp=sharing" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">SIMD-0123: Reward Distribution on Solana</h3>
+                    <p class="blog-excerpt">
+                        Technical analysis of Solana's reward distribution system.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">Solana</span>
+                        <span class="tag">Technical</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                    <br><br>
+                    <a href="https://docs.google.com/document/d/1wsXvYI5T38OfY0W7dPtKmgcemN5DJVSFhPk2KjFaviM/edit?usp=sharing" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">Alenglow Whitepaper Study</h3>
+                    <p class="blog-excerpt">
+                        In-depth examination of Alenglow protocol architecture and mechanisms.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">Whitepaper</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Protocol</span>
+                    </div>
+                    <br><br>
+                    <a href="https://docs.google.com/document/d/16M6qe6Hz7dJ1nMcePV7PJ62ac9SD3OcePHRsqgkDROo/edit?usp=sharing" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <h3 class="blog-title">OnChain Analysis: Aave V3 Pool</h3>
+                    <p class="blog-excerpt">
+                        Comprehensive on-chain analysis of Aave V3 liquidity pools and user behavior.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="tag">DeFi</span>
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Aave</span>
+                    </div>
+                    <br><br>
+                    <a href="https://github.com/SarthiBorkar/Aave_v3-Track" target="_blank" class="blog-button">Read Article →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             GAME SECTION
+             ======================================== -->
+        <section id="game">
+            <h2 class="section-title">Flappy Me</h2>
+            <div class="game-container">
+                <p class="game-description">
+                    Take a break and play! Tap or press SPACE to flap through the obstacles.
+                </p>
+                <canvas id="gameCanvas" width="400" height="600"></canvas>
+                <div class="game-stats">
+                    <span>Score: <span id="currentScore">0</span></span> |
+                    <span>High Score: <span id="highScore">0</span></span>
+                </div>
+                <div class="game-controls">
+                    <button id="startButton" class="game-button">Start Game</button>
+                    <button id="resetButton" class="game-button">Reset</button>
+                </div>
+                <p class="game-instructions">
+                    💡 Click canvas or press SPACE to flap | Avoid the obstacles!
+                </p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             FOOTER
+             ======================================== -->
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/SarthiBorkar" target="_blank" class="social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/sarthi-borkar007/" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/SarthiB7" target="_blank" class="social-link" aria-label="Twitter/X">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://t.me/Sneekpeek_s" target="_blank" class="social-link" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                </a>
+                <a href="https://warpcast.com/sarthi" target="_blank" class="social-link" aria-label="Warpcast">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm3 4v10h2V7H7zm8 0v10h2V7h-2zm-4 3v7h2v-7h-2z"/>
+                    </svg>
+                </a>
+                <a href="mailto:eth.sarthi@gmail.com" class="social-link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer-text">Made with ♥ and pixels in Berlin</p>
+            <p class="footer-text">© 2025 Sarthi Borkar. Building the decentralized future.</p>
+        </footer>
+    </div>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // ========================================
+        // THEME TOGGLE
+        // ========================================
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or default to 'dark'
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = htmlElement.getAttribute('data-theme');
+            const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Update game colors
+            updateGameColors();
+        });
+
+        // ========================================
+        // MOBILE MENU TOGGLE
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // ========================================
+        // LEARN MORE BUTTON
+        // ========================================
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const aboutHidden = document.getElementById('aboutHidden');
+        let isExpanded = false;
+
+        learnMoreBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            if (isExpanded) {
+                aboutHidden.style.display = 'block';
+                learnMoreBtn.textContent = 'Show Less ↑';
+            } else {
+                aboutHidden.style.display = 'none';
+                learnMoreBtn.textContent = 'Learn More →';
+            }
+        });
+
+        // ========================================
+        // SMOOTH SCROLL NAVIGATION
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - navHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // ACTIVE SECTION HIGHLIGHTING
+        // ========================================
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    const activeLink = document.querySelector(`.nav-link[href="#${currentId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // ========================================
+        // SKILL BAR ANIMATION ON SCROLL
+        // ========================================
+        const skillBars = document.querySelectorAll('.skill-progress');
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                    skillObserver.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // ========================================
+        // FLAPPY ME GAME
+        // ========================================
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Load NFT image for player
+        const playerImage = new Image();
+        playerImage.src = 'assets/images/nft.jpg';
+        let imageLoaded = false;
+
+        playerImage.onload = function() {
+            imageLoaded = true;
+        };
+
+        playerImage.onerror = function() {
+            console.log('NFT image not found, using default square');
+            imageLoaded = false;
+        };
+
+        // Game variables
+        let player = {
+            x: 80,
+            y: 250,
+            width: 40,
+            height: 40,
+            velocity: 0,
+            gravity: 0.5,
+            jump: -9
+        };
+
+        let obstacles = [];
+        let score = 0;
+        let highScore = localStorage.getItem('flappyHighScore') || 0;
+        let gameRunning = false;
+        let gameOver = false;
+        let frameCount = 0;
+
+        // Update high score display
+        document.getElementById('highScore').textContent = highScore;
+
+        // Game constants
+        const OBSTACLE_WIDTH = 50;
+        const OBSTACLE_GAP = 150;
+        const OBSTACLE_SPEED = 2;
+        const SPAWN_INTERVAL = 120; // frames
+
+        // Colors - will be updated based on theme
+        let COLORS = {
+            player: '#00ff41',
+            obstacle: '#ff006e',
+            background: '#0a0e27',
+            accent: '#00d9ff',
+            grid: 'rgba(0, 255, 65, 0.05)'
+        };
+
+        // Function to update game colors based on theme
+        function updateGameColors() {
+            const theme = htmlElement.getAttribute('data-theme');
+            if (theme === 'light') {
+                COLORS = {
+                    player: '#ffb7c5',
+                    obstacle: '#5b9aa9',
+                    background: '#faf9f6',
+                    accent: '#88a96c',
+                    grid: 'rgba(255, 183, 197, 0.05)',
+                    obstaclePattern: 'rgba(136, 169, 108, 0.2)'
+                };
+            } else {
+                COLORS = {
+                    player: '#00ff41',
+                    obstacle: '#ff006e',
+                    background: '#0a0e27',
+                    accent: '#00d9ff',
+                    grid: 'rgba(0, 255, 65, 0.05)',
+                    obstaclePattern: 'rgba(0, 217, 255, 0.1)'
+                };
+            }
+        }
+
+        // Initialize colors
+        updateGameColors();
+
+        // Initialize game
+        function initGame() {
+            player.y = 250;
+            player.velocity = 0;
+            obstacles = [];
+            score = 0;
+            frameCount = 0;
+            gameOver = false;
+            document.getElementById('currentScore').textContent = score;
+        }
+
+        // Create obstacle
+        function createObstacle() {
+            const minHeight = 50;
+            const maxHeight = canvas.height - OBSTACLE_GAP - minHeight;
+            const height = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+
+            obstacles.push({
+                x: canvas.width,
+                topHeight: height,
+                bottomY: height + OBSTACLE_GAP,
+                scored: false
+            });
+        }
+
+        // Update game state
+        function update() {
+            if (!gameRunning || gameOver) return;
+
+            frameCount++;
+
+            // Update player
+            player.velocity += player.gravity;
+            player.y += player.velocity;
+
+            // Check boundaries
+            if (player.y + player.height >= canvas.height || player.y <= 0) {
+                endGame();
+                return;
+            }
+
+            // Spawn obstacles
+            if (frameCount % SPAWN_INTERVAL === 0) {
+                createObstacle();
+            }
+
+            // Update obstacles
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].x -= OBSTACLE_SPEED;
+
+                // Check collision
+                if (
+                    player.x < obstacles[i].x + OBSTACLE_WIDTH &&
+                    player.x + player.width > obstacles[i].x &&
+                    (player.y < obstacles[i].topHeight ||
+                     player.y + player.height > obstacles[i].bottomY)
+                ) {
+                    endGame();
+                    return;
+                }
+
+                // Update score
+                if (!obstacles[i].scored && obstacles[i].x + OBSTACLE_WIDTH < player.x) {
+                    obstacles[i].scored = true;
+                    score++;
+                    document.getElementById('currentScore').textContent = score;
+                }
+
+                // Remove off-screen obstacles
+                if (obstacles[i].x + OBSTACLE_WIDTH < 0) {
+                    obstacles.splice(i, 1);
+                }
+            }
+        }
+
+        // Draw game
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = COLORS.background;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid effect
+            ctx.strokeStyle = COLORS.grid;
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
+            for (let i = 0; i < canvas.height; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+
+            // Draw player (NFT image or square)
+            if (imageLoaded) {
+                ctx.save();
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+                ctx.restore();
+
+                ctx.strokeStyle = COLORS.accent;
+                ctx.lineWidth = 3;
+                ctx.strokeRect(player.x, player.y, player.width, player.height);
+            } else {
+                ctx.fillStyle = COLORS.player;
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+                ctx.strokeStyle = COLORS.accent;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(player.x, player.y, player.width, player.height);
+            }
+
+            // Draw obstacles
+            const theme = htmlElement.getAttribute('data-theme');
+            ctx.fillStyle = COLORS.obstacle;
+            for (let obstacle of obstacles) {
+                if (theme === 'light') {
+                    // Light mode: bamboo-style obstacles
+                    ctx.fillStyle = COLORS.obstacle;
+                    ctx.fillRect(obstacle.x, 0, OBSTACLE_WIDTH, obstacle.topHeight);
+                    ctx.fillRect(obstacle.x, obstacle.bottomY, OBSTACLE_WIDTH, canvas.height - obstacle.bottomY);
+
+                    ctx.strokeStyle = COLORS.accent;
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(obstacle.x, 0, OBSTACLE_WIDTH, obstacle.topHeight);
+                    ctx.strokeRect(obstacle.x, obstacle.bottomY, OBSTACLE_WIDTH, canvas.height - obstacle.bottomY);
+
+                    // Bamboo segments
+                    ctx.fillStyle = COLORS.obstaclePattern;
+                    for (let y = 15; y < obstacle.topHeight; y += 30) {
+                        ctx.fillRect(obstacle.x, y, OBSTACLE_WIDTH, 5);
+                    }
+                    for (let y = obstacle.bottomY + 15; y < canvas.height; y += 30) {
+                        ctx.fillRect(obstacle.x, y, OBSTACLE_WIDTH, 5);
+                    }
+                } else {
+                    // Dark mode: neon pipes
+                    ctx.fillStyle = COLORS.obstacle;
+                    ctx.fillRect(obstacle.x, 0, OBSTACLE_WIDTH, obstacle.topHeight);
+                    ctx.fillRect(obstacle.x, obstacle.bottomY, OBSTACLE_WIDTH, canvas.height - obstacle.bottomY);
+
+                    ctx.strokeStyle = COLORS.accent;
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(obstacle.x, 0, OBSTACLE_WIDTH, obstacle.topHeight);
+                    ctx.strokeRect(obstacle.x, obstacle.bottomY, OBSTACLE_WIDTH, canvas.height - obstacle.bottomY);
+
+                    // Pixel pattern
+                    ctx.fillStyle = COLORS.obstaclePattern;
+                    for (let y = 0; y < obstacle.topHeight; y += 10) {
+                        ctx.fillRect(obstacle.x + 10, y, 10, 5);
+                    }
+                    for (let y = obstacle.bottomY; y < canvas.height; y += 10) {
+                        ctx.fillRect(obstacle.x + 10, y, 10, 5);
+                    }
+                }
+            }
+
+            // Draw game over screen
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(10, 14, 39, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = COLORS.player;
+                ctx.font = '20px "Press Start 2P"';
+                ctx.textAlign = 'center';
+                ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 40);
+
+                ctx.font = '16px "Press Start 2P"';
+                ctx.fillStyle = COLORS.accent;
+                ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2);
+
+                ctx.font = '12px "Press Start 2P"';
+                ctx.fillStyle = COLORS.obstacle;
+                ctx.fillText('Click START', canvas.width / 2, canvas.height / 2 + 30);
+                ctx.fillText('to play again', canvas.width / 2, canvas.height / 2 + 50);
+            }
+
+            // Draw start screen
+            if (!gameRunning && !gameOver) {
+                ctx.fillStyle = 'rgba(10, 14, 39, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = COLORS.player;
+                ctx.font = '20px "Press Start 2P"';
+                ctx.textAlign = 'center';
+                ctx.fillText('FLAPPY ME', canvas.width / 2, canvas.height / 2 - 40);
+
+                ctx.font = '12px "Press Start 2P"';
+                ctx.fillStyle = COLORS.accent;
+                ctx.fillText('Click START', canvas.width / 2, canvas.height / 2);
+                ctx.fillText('or press SPACE', canvas.width / 2, canvas.height / 2 + 20);
+
+                ctx.fillStyle = COLORS.obstacle;
+                ctx.fillText('to begin', canvas.width / 2, canvas.height / 2 + 50);
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Player jump
+        function jump() {
+            if (!gameRunning && !gameOver) {
+                startGame();
+            } else if (gameRunning && !gameOver) {
+                player.velocity = player.jump;
+            }
+        }
+
+        // Start game
+        function startGame() {
+            initGame();
+            gameRunning = true;
+            gameOver = false;
+        }
+
+        // End game
+        function endGame() {
+            gameOver = true;
+            gameRunning = false;
+
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('flappyHighScore', highScore);
+                document.getElementById('highScore').textContent = highScore;
+            }
+        }
+
+        // Reset game
+        function resetGame() {
+            initGame();
+            gameRunning = false;
+            gameOver = false;
+            draw();
+        }
+
+        // Event listeners
+        document.getElementById('startButton').addEventListener('click', startGame);
+        document.getElementById('resetButton').addEventListener('click', resetGame);
+
+        canvas.addEventListener('click', jump);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+        });
+
+        // Start game loop
+        gameLoop();
+        draw();
+
+        // ========================================
+        // CONSOLE EASTER EGG
+        // ========================================
+        console.log('%c███████████████████████████████████████', 'color: #00ff41');
+        console.log('%c█                                     █', 'color: #00ff41');
+        console.log('%c█   WELCOME TO THE MATRIX, NEO...    █', 'color: #00ff41');
+        console.log('%c█                                     █', 'color: #00ff41');
+        console.log('%c█   You found the console!           █', 'color: #00ff41');
+        console.log('%c█   Type: konami() for a surprise    █', 'color: #00ff41');
+        console.log('%c█                                     █', 'color: #00ff41');
+        console.log('%c███████████████████████████████████████', 'color: #00ff41');
+
+        // Konami Code Easter Egg
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+        window.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+
+            if (konamiCode.join('') === konamiPattern.join('')) {
+                document.body.style.animation = 'glitch 0.3s infinite';
+                alert('🎮 ACHIEVEMENT UNLOCKED: Konami Code Master! 🎮');
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 3000);
+            }
+        });
+
+        window.konami = function() {
+            alert('🎮 Up Up Down Down Left Right Left Right B A 🎮\nTry it on your keyboard!');
+        };
+    </script>
+</body>
+</html>
