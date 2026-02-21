@@ -135,6 +135,94 @@
         }
 
         /* ========================================
+           DECORATIVE ELEMENTS
+           ======================================== */
+        .decorative-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--mid-gray);
+            pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .decorative-corner.top-left {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .decorative-corner.top-right {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .decorative-corner.bottom-left {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .decorative-corner.bottom-right {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 4rem 0 3rem;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--mid-gray), transparent);
+        }
+
+        .section-divider-text {
+            font-family: var(--font-pixel);
+            font-size: 0.35rem;
+            color: var(--mid-gray);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .pixel-dots {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .pixel-dots span {
+            width: 3px;
+            height: 3px;
+            background: var(--mid-gray);
+            display: inline-block;
+            opacity: 0.4;
+        }
+
+        .pixel-accent {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* ========================================
            NAVIGATION
            ======================================== */
         .navbar {
@@ -316,21 +404,42 @@
            SECTIONS
            ======================================== */
         section {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             max-width: 1000px;
             margin: 0 auto;
+            position: relative;
         }
 
         .section-title {
             font-family: var(--font-pixel);
             font-size: clamp(1rem, 3vw, 1.5rem);
             text-align: left;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             color: var(--white);
             text-transform: lowercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--mid-gray);
-            padding-bottom: 1rem;
+            letter-spacing: 3px;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .section-title::before {
+            content: '■';
+            font-size: 0.6rem;
+            color: var(--white);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--white), transparent);
         }
 
         /* ========================================
@@ -344,16 +453,36 @@
         }
 
         .about-card {
-            padding: 0;
+            padding: 2.5rem;
+            border: 1px solid var(--dark-gray);
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--mid-gray);
+        }
+
+        .about-card:hover .decorative-corner {
+            opacity: 1;
         }
 
         .about-card h3 {
             font-family: var(--font-pixel);
             font-size: 0.7rem;
             color: var(--white);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-transform: lowercase;
             letter-spacing: 2px;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .about-card h3::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--mid-gray);
         }
 
         .about-card p {
@@ -455,12 +584,34 @@
 
         .project-card {
             border: 1px solid var(--dark-gray);
-            padding: 1.5rem;
-            transition: border-color 0.3s ease;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(26, 26, 26, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--white);
+            transition: width 0.3s ease;
         }
 
         .project-card:hover {
             border-color: var(--mid-gray);
+            background: rgba(26, 26, 26, 0.6);
+        }
+
+        .project-card:hover::before {
+            width: 100%;
+        }
+
+        .project-card:hover .decorative-corner {
+            opacity: 1;
         }
 
         .project-year {
@@ -668,6 +819,8 @@
 
             <div class="about-grid">
                 <div class="about-card animate-on-scroll">
+                    <div class="decorative-corner top-left"></div>
+                    <div class="decorative-corner bottom-right"></div>
                     <h3>who i am</h3>
                     <p>
                         Computer Science student at the International University of Applied Sciences in Berlin
@@ -680,6 +833,8 @@
                 </div>
 
                 <div class="about-card animate-on-scroll">
+                    <div class="decorative-corner top-left"></div>
+                    <div class="decorative-corner bottom-right"></div>
                     <h3>what i do</h3>
                     <p>
                         Currently diving deep into TON Blockchain, contributing to open-source projects, and
@@ -690,6 +845,14 @@
                         the latest in decentralized technology.
                     </p>
                 </div>
+            </div>
+
+            <div class="pixel-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
 
             <div class="skills-grid">
@@ -734,6 +897,9 @@
 
         <!-- Work Section -->
         <section id="work">
+            <div class="section-divider">
+                <span class="section-divider-text">experience</span>
+            </div>
             <h2 class="section-title animate-on-scroll">work</h2>
             <div class="work-list">
                 <div class="work-item">
@@ -788,9 +954,14 @@
 
         <!-- Research Section -->
         <section id="research">
+            <div class="section-divider">
+                <span class="section-divider-text">publications</span>
+            </div>
             <h2 class="section-title animate-on-scroll">research</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">simd-0204: solana improvement</h3>
                     <p class="project-description">
@@ -805,6 +976,8 @@
                 </div>
 
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">walrus for rookies</h3>
                     <p class="project-description">
@@ -819,6 +992,8 @@
                 </div>
 
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">stablecoin vs bridges</h3>
                     <p class="project-description">
@@ -833,6 +1008,8 @@
                 </div>
 
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">simd-0123: reward distribution</h3>
                     <p class="project-description">
@@ -847,6 +1024,8 @@
                 </div>
 
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">alenglow whitepaper</h3>
                     <p class="project-description">
@@ -861,6 +1040,8 @@
                 </div>
 
                 <div class="project-card">
+                    <div class="decorative-corner top-right"></div>
+                    <div class="decorative-corner bottom-left"></div>
                     <div class="project-year">2025</div>
                     <h3 class="project-title">onchain analysis: aave v3</h3>
                     <p class="project-description">
@@ -878,7 +1059,15 @@
 
         <!-- Footer -->
         <footer>
-            <div class="divider">— — —</div>
+            <div class="pixel-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
             <div class="social-links">
                 <a href="https://github.com/SarthiBorkar" target="_blank" class="social-link" title="GitHub">💻</a>
