@@ -1,6 +1,6 @@
 # Website update
 
-Date: 2026-09-27. Owner: coordinator. Status: In Progress.
+Date: 2026-09-27. Owner: coordinator. Status: Completed.
 
 ## Completed
 
@@ -51,11 +51,28 @@ These responses establish availability at the time of the check. They do not pro
 
 ## Release
 
-Owner: release. Status: In Progress.
-VERIFIED: GitHub Pages reported `"build_type":"legacy"` and `"source":{"branch":"main","path":"/"}`.
-VERIFIED: Commit `418dc0f` contains the React conversion and Brave checks.
-The prepared workflow builds and tests the React app before uploading `dist/`.
-Next action: switch Pages to workflow builds, push both commits, and inspect the deployment result.
+Owner: release. Status: Completed.
+
+VERIFIED: Before the update, GitHub Pages reported `"build_type":"legacy"` and `"source":{"branch":"main","path":"/"}`.
+Correction: Pages now uses `"build_type":"workflow"`. This change makes Pages publish the compiled site instead of source JSX.
+The API retained `"cname":"sarthiii.me"`.
+
+VERIFIED: Commits `418dc0f` and `b8075c1` were created sequentially and pushed to `main`.
+Push output: `dc0cdc2..b8075c1  main -> main`.
+
+VERIFIED: [Workflow 36314791468](https://github.com/Sarthib7/SarthiBorkar.github.io/actions/runs/36314791468) completed successfully.
+Its Linux Chromium checks reported `11 passed (8.7s)`.
+The deployment published commit `b8075c15f9070154eb46705109b43ee80c7c84dc`.
+
+VERIFIED: Brave loaded `https://sarthiii.me/` with HTTP 200 after deployment.
+The live check returned:
+
+```text
+LIVE_VERIFIED: HTTPS 200; React hydration, local image, 26 links, navigation reset, mobile menu, and width checks passed in Brave. No browser errors.
+```
+
+The live check covered the homepage at desktop and mobile widths. External booking completion remains outside its scope.
+Next action: review the published page in Brave. No implementation follow-up remains.
 
 ## Ownership
 
