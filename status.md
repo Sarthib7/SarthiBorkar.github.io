@@ -53,8 +53,9 @@ These responses establish availability at the time of the check. They do not pro
 
 Owner: release. Status: In Progress.
 VERIFIED: GitHub Pages reported `"build_type":"legacy"` and `"source":{"branch":"main","path":"/"}`.
+VERIFIED: Commit `418dc0f` contains the React conversion and Brave checks.
 The prepared workflow builds and tests the React app before uploading `dist/`.
-Next action: commit the verified website, commit the deployment workflow, switch Pages to workflow builds, then push.
+Next action: switch Pages to workflow builds, push both commits, and inspect the deployment result.
 
 ## Ownership
 

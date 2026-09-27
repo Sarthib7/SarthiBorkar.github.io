@@ -25,7 +25,9 @@ Open `http://127.0.0.1:4173`.
 VERIFIED: `scripts/prerender.mjs` writes the page content into `dist/index.html`.
 This retains the content and native navigation without JavaScript.
 Vite copies `public/CNAME` and the supplied assets into `dist/`.
-Publish `dist/` when deploying to static hosting. Deployment is a separate action.
+VERIFIED: `.github/workflows/deploy.yml` builds and tests `main` before publishing `dist/` to GitHub Pages.
+Changes to Markdown files alone do not trigger deployment.
+The workflow uses Chromium on Linux. Local checks use Brave when installed.
 
 ## Verify
 
