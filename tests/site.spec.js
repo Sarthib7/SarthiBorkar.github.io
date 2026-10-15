@@ -24,6 +24,17 @@ test('portfolio renders projects without browser errors', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('minimal page keeps services and contact usable without the removed copy', async ({ page }) => {
+  await openApp(page);
+  await expect(page.locator('.hero-kicker, .hero-project-note, #services .section-heading p, #work .section-heading p, #contact .section-label')).toHaveCount(0);
+  await expect(page.locator('#services h2')).toHaveText('What I build.');
+  await expect(page.locator('.service-card h3')).toHaveText(['AI automation', 'Private AI', 'Agent payments', 'Technical consulting']);
+  await expect(page.locator('.service-card ul')).toHaveCount(0);
+  for (const link of await page.locator('.service-card > a').all()) await expect(link).toHaveAttribute('href', 'https://cal.com/sarthi');
+  await expect(page.locator('.contact-copy > p')).toContainText('engineering role');
+  await expect(page.locator('.brand-word')).toHaveText(['Sarthiii', 'Sarthiii']);
+});
+
 test('workflow automatically moves through all three stages without controls', async ({ page }) => {
   await page.clock.install();
   await openApp(page);
@@ -225,12 +236,15 @@ test('each featured project has loaded local artwork', async ({ page }) => {
   }
 });
 
-test('keeps all nine projects in Selected work', async ({ page }) => {
+test('keeps all nine projects in Selected work and uses the Sarthiii brand', async ({ page }) => {
   await openApp(page);
   await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight', 'Agentsmith', 'Kairen DealRail', 'IntentVault']);
   await expect(page.locator('.project-index')).toHaveCount(0);
   await expect(page.locator('#work .work-card')).toHaveCount(9);
   await expect(page.locator('.gallery-readout')).toHaveText('01 / 09');
+  await expect(page.locator('.site-header .brand-word')).toHaveText('Sarthiii');
+  await expect(page.locator('.site-header .brand-mark svg use')).toHaveAttribute('href', '#brand-s');
+  await expect(page.locator('.site-header .brand')).toHaveAttribute('href', '#main');
 });
 
 test('carousel remeasures when upstream content changes height', async ({ page }) => {

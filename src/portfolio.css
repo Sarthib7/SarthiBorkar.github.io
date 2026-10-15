@@ -21,13 +21,15 @@ body { background: var(--paper); color: var(--ink); }
   border-color: var(--line);
 }
 .brand-mark {
-  width: 34px;
+  width: 30px;
   height: 34px;
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--paper);
+  border: 0;
+  background: transparent;
+  color: var(--accent);
 }
-.brand-word { font-size: 1.3rem; letter-spacing: -.04em; }
+.brand-mark svg { display: block; width: 100%; height: 100%; }
+.brand { gap: 10px; }
+.brand-word { font-size: 1.24rem; font-weight: 650; letter-spacing: -.045em; }
 .nav-link { font-size: .88rem; }
 .nav-link:hover, .nav-link[aria-current="location"] { color: var(--accent); }
 .header-book { border-color: var(--accent); color: var(--accent); }
@@ -197,24 +199,26 @@ body { background: var(--paper); color: var(--ink); }
   border-color: var(--line);
   background: #edf0e8;
 }
-.services-grid { --od-gap: 14px; }
+.services-grid { --od-gap: 0; border-top: 1px solid var(--line); }
 .service-card {
   position: relative;
-  gap: 20px;
-  padding: clamp(24px, 3.1vw, 36px);
-  border-color: var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  gap: 16px;
+  padding: clamp(24px, 3.1vw, 36px) 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
-.service-card-blue, .service-card-sky, .service-card-yellow { background: var(--surface); }
+.service-card:nth-child(odd) { padding-right: 32px; }
+.service-card:nth-child(even) { padding-left: 32px; }
+.service-card-blue, .service-card-sky, .service-card-yellow { background: transparent; }
 .service-top { color: #526d5b; }
 .service-top .eyebrow { font-size: .7rem; letter-spacing: .085em; }
 .service-symbol {
-  width: 46px;
-  height: 46px;
-  border-color: rgba(49, 88, 70, .22);
-  border-radius: 50%;
-  background: #e8eee5;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
   color: #315846;
 }
 .service-card h3 {
@@ -405,6 +409,8 @@ body { background: var(--paper); color: var(--ink); }
 
 .about { background: var(--paper); }
 .about-intro > p { color: #52645a; line-height: 1.7; }
+.about-intro { --od-gap: 24px; }
+.about-intro h2 { font-size: clamp(2.4rem, 4vw, 3.6rem); }
 .about-intro .tag {
   border-color: rgba(49, 88, 70, .2);
   border-radius: 2px;
@@ -505,8 +511,8 @@ body { background: var(--paper); color: var(--ink); }
   .hero-bottom { margin-top: 40px; }
   .discipline-row { grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 0; padding-block: 20px; }
   .section-heading h2, .about h2 { font-size: clamp(2.35rem, 8.4vw, 3.6rem); }
-  .services-grid { --od-cols: 1; --od-gap: 12px; }
-  .service-card { padding: 26px; }
+  .services-grid { --od-cols: 1; --od-gap: 0; }
+  .service-card, .service-card:nth-child(odd), .service-card:nth-child(even) { padding: 26px 0; }
   .work-section:has(.is-carousel) .work-stage { padding-block: 32px; }
   .project-gallery .work-art { height: 240px; min-height: 240px; padding: 18px; }
   .project-gallery .work-art:has(.project-cover-label) .project-visual { right: 4%; bottom: 15%; width: min(38%, 176px); max-height: 142px; }
@@ -541,7 +547,7 @@ body { background: var(--paper); color: var(--ink); }
 
 @media (hover: hover) {
   .service-card { transition: border-color 140ms ease-out, background-color 140ms ease-out; }
-  .service-card:hover { border-color: rgba(49, 88, 70, .35); background: #fffefa; }
+  .service-card:hover { border-color: rgba(49, 88, 70, .35); }
   .work-card { transition: border-color 140ms ease-out; }
   .work-card:hover { border-color: rgba(49, 88, 70, .32); }
 }
