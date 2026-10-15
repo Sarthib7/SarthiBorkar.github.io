@@ -86,7 +86,7 @@ Reduced motion and no JavaScript retain a static project grid.
 
 VERIFIED: `src/ProjectVisual.jsx` loads the local artwork selected in `src/projects.js`.
 Selected work includes FalconOS, Fundwise, Citadel, Noesora, Exbridge, LastLight, Agentsmith, Kairen DealRail, and IntentVault.
-The covers mix product artwork with conceptual SVG objects. Fundwise’s mock is labeled `Product concept`.
+The covers mix product artwork with conceptual SVG objects. FalconOS, Fundwise, and LastLight use animated Anatomy mechanisms with static reduced-motion views.
 All nine projects share one gallery.
 Regenerate them with the installed Anatomy kit:
 
