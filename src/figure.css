@@ -1,0 +1,29 @@
+.workflow-figure.iso[data-theme="light"] {
+  --anatomy-paper: #f4f6f1;
+  --anatomy-top: #fff;
+  --anatomy-shade-0: #bcc8be;
+  --anatomy-shade-1: #d1d9ce;
+  --anatomy-shade-2: #e0e6dc;
+  --anatomy-shade-3: #edf0e8;
+  --anatomy-hi: #334f43;
+  --anatomy-mid: #788e7d;
+  --anatomy-lo: #9dac9d;
+  --anatomy-faint: #cad2c7;
+  --anatomy-lit: #254e3b;
+  --anatomy-lit-top: #d9e7d7;
+  --anatomy-lit-shade: #a8bea8;
+  --anatomy-weight: .7px;
+}
+.figure-art [data-carriage] {
+  transform: translate(calc(var(--stage) * var(--travel-x)), calc(var(--stage) * var(--travel-y)));
+  transition: transform 650ms cubic-bezier(.22,.68,.25,1);
+}
+.figure-art [data-station] { opacity: .65; transition: opacity 250ms ease; }
+[data-stage="0"] [data-station="0"],
+[data-stage="1"] [data-station="1"],
+[data-stage="2"] [data-station="2"] { opacity: 1; }
+.figure-controls { display: none; }
+.js .figure-controls { display: flex; }
+@media (prefers-reduced-motion: reduce) {
+  .figure-art [data-carriage], .figure-art [data-station] { transition: none; }
+}

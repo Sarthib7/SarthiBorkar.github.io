@@ -1,0 +1,13 @@
+.project-visual {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  max-height: 240px;
+  object-fit: contain;
+}
+
+@media (max-width: 760px) {
+  .project-visual {
+    max-height: 200px;
+  }
+}
