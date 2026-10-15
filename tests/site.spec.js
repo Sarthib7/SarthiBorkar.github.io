@@ -13,7 +13,7 @@ test('portfolio renders projects without browser errors', async ({ page }) => {
   await expect(page).toHaveTitle('Sarthi Borkar | AI & Product Engineer');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('agents & people.');
   await expect(page.locator('.service-card')).toHaveCount(4);
-  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight']);
+  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight', 'Agentsmith', 'Kairen DealRail', 'IntentVault']);
   await expect(page.locator('.work-track')).toHaveCSS('display', 'flex');
   await expect(page.locator('.timeline-entry')).toHaveCount(10);
   await expect(page.locator('.hero-actions .button')).toHaveAttribute('href', 'https://cal.com/sarthi');
@@ -87,7 +87,7 @@ test('all project links stay visible and the figure fits narrow screens', async 
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await expect(page.locator('.work-card')).toHaveCount(6);
+    await expect(page.locator('.work-card')).toHaveCount(9);
     for (const link of await page.locator('.work-card a').all()) {
       await link.focus();
       await expect(link).toBeInViewport();
@@ -132,7 +132,7 @@ test.describe('without JavaScript', () => {
     await expect(page.locator('#menu-toggle')).toBeHidden();
     await expect(page.locator('.figure-art svg')).toBeVisible();
     await expect(page.locator('.figure-controls')).toHaveCount(0);
-    await expect(page.locator('.work-card')).toHaveCount(6);
+    await expect(page.locator('.work-card')).toHaveCount(9);
     await expect(page.locator('#work-track')).toHaveCSS('display', 'grid');
     await expect(page.locator('#work-controls')).toBeHidden();
     for (const link of await page.locator('.work-card a').all()) {
@@ -218,21 +218,19 @@ test('short screens and live reduced-motion changes keep every project reachable
 test('each featured project has loaded local artwork', async ({ page }) => {
   await openApp(page);
   const images = page.locator('.work-art img');
-  await expect(images).toHaveCount(6);
+  await expect(images).toHaveCount(9);
   for (const image of await images.all()) {
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
   }
 });
 
-test('features the six projects selected by Sarthi and keeps other public work discoverable', async ({ page }) => {
+test('keeps all nine projects in Selected work', async ({ page }) => {
   await openApp(page);
-  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight']);
-  await expect(page.locator('.project-index .index-project')).toHaveCount(3);
-  await expect(page.locator('.project-index')).toContainText('Agentsmith');
-  await expect(page.locator('.project-index')).toContainText('Kairen DealRail');
-  await expect(page.locator('.project-index')).toContainText('IntentVault');
-  await expect(page.locator('.gallery-readout')).toHaveText('01 / 06');
+  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight', 'Agentsmith', 'Kairen DealRail', 'IntentVault']);
+  await expect(page.locator('.project-index')).toHaveCount(0);
+  await expect(page.locator('#work .work-card')).toHaveCount(9);
+  await expect(page.locator('.gallery-readout')).toHaveText('01 / 09');
 });
 
 test('carousel remeasures when upstream content changes height', async ({ page }) => {

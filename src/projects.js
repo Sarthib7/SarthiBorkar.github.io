@@ -41,10 +41,8 @@ export const projects = [
     media: './assets/portfolio/lastlight-cover.png', variant: 'cover', caption: 'Game cover',
     url: '#contact', linkLabel: 'Discuss LastLight',
   },
-];
 
-export const additionalProjects = [
-  { name: 'Agentsmith', category: 'Developer tooling', description: 'Agent rules, authored skills, and a curated collection of reusable workflows.', url: 'https://github.com/Sarthib7/agentsmith' },
-  { name: 'Kairen DealRail', category: 'Agent commerce', description: 'Task offers, payments, escrow settlement, and receipts for agent commerce.', url: 'https://github.com/Kairen-Protocol/kairen-dealrail' },
-  { name: 'IntentVault', category: 'Private AI', description: 'Private inference workflows with reusable templates and structured outputs.', url: 'https://github.com/Sarthib7/IntentVault' },
+  { media: './assets/projects/agentsmith.svg', variant: 'object', color: 'stone', caption: 'Reusable agent workflows.', tags: ['Agent tooling', 'Developer tools'], linkLabel: 'View repository', name: 'Agentsmith', category: 'Developer tooling', description: 'Agent rules, authored skills, and a curated collection of reusable workflows.', url: 'https://github.com/Sarthib7/agentsmith' },
+  { media: './assets/projects/kairen.svg', variant: 'object', color: 'sky', caption: 'Agent commerce.', tags: ['Payments', 'Escrow'], linkLabel: 'View repository', name: 'Kairen DealRail', category: 'Agent commerce', description: 'Task offers, payments, escrow settlement, and receipts for agent commerce.', url: 'https://github.com/Kairen-Protocol/kairen-dealrail' },
+  { media: './assets/projects/intentvault.svg', variant: 'object', color: 'forest', caption: 'Private inference workflows.', tags: ['Private AI', 'Inference'], linkLabel: 'View repository', name: 'IntentVault', category: 'Private AI', description: 'Private inference workflows with reusable templates and structured outputs.', url: 'https://github.com/Sarthib7/IntentVault' },
 ];
