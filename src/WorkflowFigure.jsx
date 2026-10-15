@@ -3,11 +3,7 @@ import art from './workflow-art.svg?raw';
 import './anatomy.css';
 import './figure.css';
 
-const stages = [
-  { name: 'Collect', caption: 'Bring the documents and tools your team already uses into one workflow.' },
-  { name: 'Process', caption: 'Apply a focused AI step, with a review before the result moves forward.' },
-  { name: 'Deliver', caption: 'Return the result to your team, ready for the next task.' },
-];
+const stages = ['Collect', 'Process', 'Deliver'];
 
 export default function WorkflowFigure() {
   const [stage, setStage] = useState(0);
@@ -40,12 +36,10 @@ export default function WorkflowFigure() {
   }
   return (
     <figure className="workflow-figure iso" data-theme="light" data-stage={stage} style={{ '--stage': stage }}>
-      <div className="figure-topline"><span>FIG. 01</span><span>A WORKFLOW, MADE TANGIBLE</span></div>
       <div className="figure-art" onPointerMove={followPointer} onPointerLeave={resetPointer}>
         <div className="figure-machine" dangerouslySetInnerHTML={{ __html: art }} />
       </div>
-      <div className="figure-bottomline"><span>ONE STEP AT A TIME</span><span className="figure-readout">{String(stage + 1).padStart(2, '0')} / {stages[stage].name}</span></div>
-      <figcaption className="figure-caption">{stages[stage].caption}</figcaption>
+      <div className="figure-bottomline"><span>ONE STEP AT A TIME</span><span className="figure-readout">{String(stage + 1).padStart(2, '0')} / {stages[stage]}</span></div>
     </figure>
   );
 }

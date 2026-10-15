@@ -1,17 +1,17 @@
 .workflow-figure.iso[data-theme="light"] {
-  --anatomy-paper: #f4f6f1;
-  --anatomy-top: #fff;
-  --anatomy-shade-0: #bcc8be;
-  --anatomy-shade-1: #d1d9ce;
-  --anatomy-shade-2: #e0e6dc;
-  --anatomy-shade-3: #edf0e8;
-  --anatomy-hi: #334f43;
-  --anatomy-mid: #788e7d;
-  --anatomy-lo: #9dac9d;
-  --anatomy-faint: #cad2c7;
-  --anatomy-lit: #254e3b;
-  --anatomy-lit-top: #d9e7d7;
-  --anatomy-lit-shade: #a8bea8;
+  --anatomy-paper: #102b22;
+  --anatomy-top: #315244;
+  --anatomy-shade-0: #142d24;
+  --anatomy-shade-1: #1b382d;
+  --anatomy-shade-2: #244638;
+  --anatomy-shade-3: #2b4b3d;
+  --anatomy-hi: #d7e9cd;
+  --anatomy-mid: #93b39a;
+  --anatomy-lo: #6f8f79;
+  --anatomy-faint: #3f604c;
+  --anatomy-lit: #d5efb8;
+  --anatomy-lit-top: #abc999;
+  --anatomy-lit-shade: #6e9369;
   --anatomy-weight: .7px;
 }
 .figure-art [data-carriage] {
@@ -25,7 +25,7 @@
 .figure-art { position: relative; isolation: isolate; }
 .figure-art::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), #c4e3b08c, transparent 55%);
+  background: radial-gradient(ellipse at var(--pointer-x, 50%) var(--pointer-y, 50%), #c4e3b014, transparent 65%);
 }
 .figure-machine {
   position: relative;
