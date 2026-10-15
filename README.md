@@ -46,15 +46,59 @@ npm run verify
 ```
 
 VERIFIED: `playwright.config.js` starts a separate production preview on port 43187.
-`tests/site.spec.js` checks mobile navigation, gallery controls, reduced motion, sprite frames, and content without JavaScript.
+`tests/site.spec.js` checks mobile navigation, workflow controls, reduced motion, keyboard access, and content without JavaScript.
 The viewport check covers widths of 320, 390, 768, 1024, and 1440 pixels.
 Browser checks do not verify external booking pages or linked GitHub projects.
 
 ## Edit
 
 - `src/App.jsx`: page text and markup.
-- `src/styles.css`: original design styles and the scene width correction.
-- `src/interactions.js`: original animation and gallery logic, with React lifecycle cleanup.
+- `src/styles.css`: responsive portfolio layout and visual styles.
+- `src/interactions.js`: mobile menu and section navigation, with React lifecycle cleanup.
 - `public/`: supplied images, favicon, and the domain file.
 
 VERIFIED: The earlier `main-index.html`, `index-retro90s.html`, root `CNAME`, and `assets/` remain in the repository.
+
+## Workflow illustration
+
+VERIFIED: `src/WorkflowFigure.jsx` uses the generated `src/workflow-art.svg`.
+Its controls select collection, processing, or delivery and move the scan carriage.
+This is a conceptual workflow illustration, not a performance measurement.
+
+VERIFIED: `scripts/generate-workflow.mjs` imports the installed Anatomy kit.
+With Anatomy installed, regenerate the SVG and styles with:
+
+```sh
+node scripts/generate-workflow.mjs
+```
+
+Set `ANATOMY_ROOT` when the skill is outside `~/.agents/skills/anatomy`.
+The site build uses the committed SVG and does not need the skill installed.
+Anatomy kit styles retain their MIT license in `src/anatomy-LICENSE.txt`.
+
+## Project gallery
+
+VERIFIED: `src/ProjectCarousel.jsx` controls the project gallery.
+On large screens, page scroll moves the cards horizontally when the gallery fits below the header.
+Short screens and phones use native horizontal scrolling with arrow buttons and keyboard controls.
+Reduced motion and no JavaScript retain a static project grid.
+
+VERIFIED: `src/ProjectVisual.jsx` loads the local artwork selected in `src/projects.js`.
+Featured work includes FalconOS, Fundwise, Citadel, Noesora, Exbridge, and LastLight.
+The covers mix product artwork with conceptual SVG objects. Fundwise’s mock is labeled `Product concept`.
+The older public projects remain linked in the project index.
+Regenerate them with the installed Anatomy kit:
+
+```sh
+node scripts/generate-project-art.mjs
+```
+
+The SVGs contain the kit style license. A normal site build does not require Anatomy.
+
+## Portfolio presentation
+
+VERIFIED: `src/portfolio.css` is the final visual layer imported after `src/styles.css`.
+It styles the dark hero, project covers, project index, experience, and contact sections.
+`src/projects.js` holds the six featured projects and the three additional public projects.
+LastLight currently links to contact because this session did not establish a public project URL.
+Pull requests run verification. Merging into `main` triggers the Pages deployment workflow.
