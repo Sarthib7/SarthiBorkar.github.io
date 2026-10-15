@@ -33,6 +33,9 @@ test('minimal page keeps services and contact usable without the removed copy', 
   for (const link of await page.locator('.service-card > a').all()) await expect(link).toHaveAttribute('href', 'https://cal.com/sarthi');
   await expect(page.locator('.contact-copy > p')).toContainText('engineering role');
   await expect(page.locator('.brand-word')).toHaveText(['Sarthiii', 'Sarthiii']);
+  await expect(page.locator('.figure-topline, .figure-caption')).toHaveCount(0);
+  await expect(page.locator('.workflow-figure')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(page.locator('.figure-art')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
 });
 
 test('workflow automatically moves through all three stages without controls', async ({ page }) => {
