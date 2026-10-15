@@ -85,9 +85,9 @@ Short screens and phones use native horizontal scrolling with arrow buttons and 
 Reduced motion and no JavaScript retain a static project grid.
 
 VERIFIED: `src/ProjectVisual.jsx` loads the local artwork selected in `src/projects.js`.
-Featured work includes FalconOS, Fundwise, Citadel, Noesora, Exbridge, and LastLight.
+Selected work includes FalconOS, Fundwise, Citadel, Noesora, Exbridge, LastLight, Agentsmith, Kairen DealRail, and IntentVault.
 The covers mix product artwork with conceptual SVG objects. Fundwise’s mock is labeled `Product concept`.
-The older public projects remain linked in the project index.
+All nine projects share one gallery.
 Regenerate them with the installed Anatomy kit:
 
 ```sh
@@ -99,7 +99,7 @@ The SVGs contain the kit style license. A normal site build does not require Ana
 ## Portfolio presentation
 
 VERIFIED: `src/portfolio.css` is the final visual layer imported after `src/styles.css`.
-It styles the dark hero, project covers, project index, experience, and contact sections.
-`src/projects.js` holds the six featured projects and the three additional public projects.
+It styles the dark hero, project covers, experience, and contact sections.
+`src/projects.js` holds all nine projects in gallery order.
 LastLight currently links to contact because this session did not establish a public project URL.
 Pull requests run verification. Merging into `main` triggers the Pages deployment workflow.

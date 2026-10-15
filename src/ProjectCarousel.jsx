@@ -3,6 +3,7 @@ import './carousel.css';
 
 export default function ProjectCarousel({ children }) {
   const galleryRef = useRef(null);
+  const projectCount = Children.count(children);
 
   useEffect(() => {
     const gallery = galleryRef.current;
@@ -156,7 +157,7 @@ export default function ProjectCarousel({ children }) {
       track.style.removeProperty('transform');
       controls.hidden = true;
     };
-  }, []);
+  }, [projectCount]);
 
   return (
     <div className="project-gallery" ref={galleryRef}>
@@ -170,7 +171,7 @@ export default function ProjectCarousel({ children }) {
         </div>
         <span className="gallery-hint">SWIPE OR USE ARROWS</span>
         <div className="gallery-progress" id="work-progress" role="progressbar" aria-label="Project gallery position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span className="gallery-progress-fill" /></div>
-        <span className="gallery-readout">01 / {String(Children.count(children)).padStart(2, '0')}</span>
+        <span className="gallery-readout">01 / {String(projectCount).padStart(2, '0')}</span>
       </div>
       <p className="sr-only" aria-live="polite" aria-atomic="true" />
     </div>

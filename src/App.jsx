@@ -3,7 +3,7 @@ import { initializeInteractions } from './interactions.js';
 import WorkflowFigure from './WorkflowFigure.jsx';
 import ProjectCarousel from './ProjectCarousel.jsx';
 import ProjectVisual from './ProjectVisual.jsx';
-import { projects, additionalProjects } from './projects.js';
+import { projects } from './projects.js';
 
 export default function App() {
   useEffect(initializeInteractions, []);
@@ -126,7 +126,7 @@ export default function App() {
         <p className="eyebrow section-label">02 / SELECTED PROJECTS</p>
         <div className="section-heading">
           <h2 id="work-title">Selected work<span className="heading-period">.</span></h2>
-          <p>Six projects across AI infrastructure, shared finance, developer tools, robotics, and multiplayer games.</p>
+          <p>Projects across AI infrastructure, shared finance, developer tools, robotics, and multiplayer games.</p>
         </div>
         <ProjectCarousel>
           {projects.map((project, index) => (
@@ -148,13 +148,6 @@ export default function App() {
           ))}
         </ProjectCarousel>
       </div>
-    </div>
-  </section>
-
-  <section className="project-index section" aria-labelledby="project-index-title">
-    <div className="container">
-      <div className="section-heading"><div><p className="eyebrow section-label">MORE TO EXPLORE</p><h2 id="project-index-title">More open-source work.</h2></div><a className="text-link" href="https://github.com/Sarthib7">All public repositories <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div>
-      <div className="project-index-grid">{additionalProjects.map((project, index) => <a className="index-project" href={project.url} key={project.name}><span className="index-project-number">{String(index + 1).padStart(2, '0')}</span><div className="index-project-main"><span className="index-project-tag">{project.category}</span><h3>{project.name}</h3><p>{project.description}</p></div><svg className="icon" aria-hidden="true"><use href="#external"/></svg></a>)}</div>
     </div>
   </section>
 
