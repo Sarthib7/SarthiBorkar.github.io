@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
 import { initializeInteractions } from './interactions.js';
+import WorkflowFigure from './WorkflowFigure.jsx';
+import ProjectCarousel from './ProjectCarousel.jsx';
+import ProjectVisual from './ProjectVisual.jsx';
+import { projects, additionalProjects } from './projects.js';
 
 export default function App() {
   useEffect(initializeInteractions, []);
@@ -28,8 +32,8 @@ export default function App() {
 <header className="site-header" id="top">
   <div className="container header-row">
     <a className="brand" href="#main" aria-label="Sarthi Borkar, home">
-      <span className="brand-mark" aria-hidden="true"><span className="pixel-star"></span></span>
-      <span className="brand-word">sarthi<b>.</b></span>
+      <span className="brand-mark" aria-hidden="true">sb</span>
+      <span className="brand-word">Sarthi Borkar<b>.</b></span>
     </a>
     <button className="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation" hidden>
       <svg className="icon" aria-hidden="true"><use href="#menu"/></svg>
@@ -46,52 +50,40 @@ export default function App() {
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabIndex={-1}>
   <section className="hero" aria-labelledby="hero-title">
     <div className="container">
       <div className="od-grid hero-grid">
         <div className="od-stack hero-intro">
-          <p className="hero-kicker"><span className="pixel-star" aria-hidden="true"></span> FOR SMALL BUSINESSES &amp; STARTUPS</p>
-          <h1 id="hero-title"><span>AI BUILT</span><span>FOR YOUR</span><span className="red-line">BUSINESS.</span></h1>
-          <p className="hero-copy">I help small businesses and startups reduce manual work with AI and custom software. Start with one business problem and a clearly scoped solution.</p>
+          <p className="hero-kicker"><span className="pixel-star" aria-hidden="true"></span> INDEPENDENT ENGINEER / BERLIN</p>
+          <p className="hero-signature">Sarthi Borkar</p>
+          <h1 id="hero-title"><span>Engineering for</span><span className="hero-title-serif">agents &amp; people.</span></h1>
+          <p className="hero-copy">I build AI tools, payment systems, and products people can use. My work connects product thinking with engineering across software, finance, and robotics.</p>
           <div className="od-cluster hero-actions">
             <a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a>
-            <a className="text-link" href="#work">Explore the work <svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a>
+            <a className="text-link" href="#work">View selected work <svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a>
           </div>
-          <div className="od-cluster hero-skills" aria-label="Services"><span>AUTOMATION</span><span>PRIVATE AI</span><span>PAYMENTS</span></div>
+          <div className="od-cluster hero-skills" aria-label="Services"><span>AI SYSTEMS</span><span>PRODUCT ENGINEERING</span><span>AGENT PAYMENTS</span></div>
         </div>
-        <div className="console-wrap" aria-hidden="true">
-          <div className="game-console" id="sarthi-console" data-phase="0">
-            <div className="console-title"><span>SARTHI.EXE</span><span className="window-lights"><span></span><span></span><span></span></span></div>
-            <div className="game-screen">
-              <div className="game-hud"><div className="od-field"><span>FOCUS</span><span className="hud-sub">YOUR BUSINESS</span></div><div className="od-field"><span>APPROACH</span><span className="hud-sub">PLAN &amp; BUILD</span></div></div>
-              <div className="scene">
-                <img className="scene-backdrop" src="assets/pixel-valley.png" width="1536" height="1024" alt="" decoding="async" />
-                <div className="scene-pillar scene-pillar-left"><span className="coin"></span><span className="question-block">?</span><span className="pixel-platform"></span></div>
-                <div className="bot"><span className="bot-shadow"></span><span className="bot-dust"></span><span className="bot-rig"><canvas className="player-sprite" width="224" height="360" aria-hidden="true"></canvas><span className="player-head"><span className="player-hood"></span><span className="player-face"></span><span className="player-visor"></span></span><span className="bot-body"><i></i><i></i></span><span className="bot-feet"><i></i><i></i></span></span></div>
-                <div className="scene-pillar"><span className="coin"></span><span className="question-block code-block">&lt;/&gt;</span><span className="pixel-platform"></span></div>
-              </div>
-              <div className="quest-steps"><span className="quest-step"><i></i>PLAN</span><span className="quest-step"><i></i>BUILD</span><span className="quest-step"><i></i>SHIP</span></div>
-              <div className="game-caption">BUSINESS NEEDS. PRACTICAL SOFTWARE.</div>
-            </div>
-            <div className="console-footer"><span className="console-footer-label">SCROLL TO BUILD</span><span className="console-dots"><i></i><i></i></span></div>
-          </div>
-          <div className="art-caption"><span>INDEPENDENT ENGINEER. BASED IN BERLIN.</span><span className="pixel-star"></span></div>
-        </div>
+        <div className="hero-visual"><WorkflowFigure /><p className="hero-project-note"><span className="pixel-star" aria-hidden="true"/> From a clear problem to a working system.</p></div>
       </div>
       <div className="hero-bottom">
-        <a className="scroll-hint" href="#services"><svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg> SCROLL TO EXPLORE</a>
-        <p>Based in Berlin. Working directly with your team.</p>
-        <span className="chapter-number" aria-hidden="true">01 / START</span>
+        <a className="scroll-hint" href="#services"><svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg> BUILT WITH PURPOSE</a>
+        <p>Independent work. Open to client projects and engineering roles.</p>
+        <span className="chapter-number" aria-hidden="true">BERLIN, DE</span>
       </div>
     </div>
   </section>
 
+  <section className="discipline-strip" aria-label="Areas of work">
+    <div className="container discipline-row"><span>AI systems</span><span>Agent payments</span><span>Product engineering</span><span>Berlin, Germany</span></div>
+  </section>
+
   <section className="section services" id="services" aria-labelledby="services-title">
     <div className="container">
-      <p className="eyebrow section-label">01 / SERVICES</p>
+      <p className="eyebrow section-label">01 / HOW I CAN HELP</p>
       <div className="section-heading" data-reveal>
-        <h2 id="services-title">SOLUTIONS FOR<br />DAILY WORK.</h2>
+        <h2 id="services-title">Less busywork.<br />More useful software.</h2>
         <p>For local businesses, the starting point is often repetitive admin. For startups, it may be a new product or integration. Choose the support your team needs.</p>
       </div>
       <div className="od-grid services-grid">
@@ -133,36 +125,36 @@ export default function App() {
       <div className="container">
         <p className="eyebrow section-label">02 / SELECTED PROJECTS</p>
         <div className="section-heading">
-          <h2 id="work-title">SELECTED<br /><span>PROJECTS.</span></h2>
-          <p>Explore my work in private AI and agent payments. These software projects and contributions link to their source code.</p>
+          <h2 id="work-title">Selected work<span className="heading-period">.</span></h2>
+          <p>Six projects across AI infrastructure, shared finance, developer tools, robotics, and multiplayer games.</p>
         </div>
-        <div className="work-viewport" id="work-viewport" role="region" aria-roledescription="carousel" aria-label="Selected projects">
-          <div className="od-rail work-track" id="work-track" tabIndex="0" aria-label="Project cards. Use the left and right arrow keys to explore.">
-            <article className="work-card" aria-label="1 of 4, Citadel">
-              <div className="work-art work-art-sky" aria-hidden="true"><span className="art-corner">01 / MEMORY</span><div className="pixel-object"><div className="px-archive"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span className="pixel-star"></span></div>
-              <div className="work-body"><div className="od-cluster work-meta"><span className="work-kind">TEAM PROJECT</span><span className="project-status">In testing</span></div><h3>Citadel</h3><p>Self-hosted memory for engineering teams and the agents working alongside them.</p><a className="text-link" href="https://github.com/masumi-network/Citadel">Explore Citadel <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on GitHub</span></a></div>
+        <ProjectCarousel>
+          {projects.map((project, index) => (
+            <article className="work-card" key={project.name} aria-labelledby={`project-${index}`}>
+              <div className={`work-art work-art-${project.color} work-art--${project.variant}`} aria-hidden="true">
+                <span className="art-corner">{project.category}</span>
+                <ProjectVisual src={project.media} variant={project.variant} />
+                <div className="project-cover-copy"><span className="project-cover-label">{project.name}</span><span className="project-cover-subtitle">{project.caption}</span></div>
+                <span className="project-number">{String(index + 1).padStart(2, '0')}</span>
+              </div>
+              <div className="work-body">
+                <div className="work-meta"><span className="work-kind">{project.category}</span>{project.status && <span className="project-status">{project.status}</span>}</div>
+                <h3 id={`project-${index}`}>{project.name}</h3>
+                <p>{project.description}</p>
+                <div className="project-tags" aria-label="Project focus">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+                <a className="text-link" href={project.url}>{project.linkLabel} <svg className="icon" aria-hidden="true"><use href={project.url.startsWith('#') ? '#arrow-right' : '#external'}/></svg></a>
+              </div>
             </article>
-            <article className="work-card" aria-label="2 of 4, Kairen DealRail">
-              <div className="work-art work-art-yellow" aria-hidden="true"><span className="art-corner">02 / PAYMENTS</span><div className="pixel-object"><div className="px-rail"><span className="px-node"><i></i></span><span className="px-route"></span><span className="px-node"><i></i></span><span className="coin"></span></div></div><span className="pixel-star"></span></div>
-              <div className="work-body"><div className="od-cluster work-meta"><span className="work-kind">TEAM PROJECT</span><span className="project-status">Curated marketplace demo</span></div><h3>Kairen DealRail</h3><p>An agent commerce desk for task offers, payments, and escrow settlement.</p><a className="text-link" href="https://github.com/Kairen-Protocol/kairen-dealrail">Explore DealRail <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on GitHub</span></a></div>
-            </article>
-            <article className="work-card" aria-label="3 of 4, IntentVault">
-              <div className="work-art work-art-blue" aria-hidden="true"><span className="art-corner">03 / PRIVATE AI</span><div className="pixel-object"><span className="px-vault"><span className="px-lock"></span></span></div><span className="pixel-star"></span></div>
-              <div className="work-body"><span className="work-kind">PROJECT / PRIVATE AI</span><h3>IntentVault</h3><p>Private AI workflows with reusable templates and structured outputs.</p><a className="text-link" href="https://github.com/Sarthib7/IntentVault">Explore IntentVault <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on GitHub</span></a></div>
-            </article>
-            <article className="work-card" aria-label="4 of 4, Agentsmith">
-              <div className="work-art work-art-red" aria-hidden="true"><span className="art-corner">04 / AGENT TOOLS</span><div className="pixel-object"><span className="px-bench"><i className="px-tool"></i><i className="px-tool"></i><i className="px-tool"></i></span></div><span className="pixel-star"></span></div>
-              <div className="work-body"><span className="work-kind">AUTHORED &amp; CURATED COLLECTION</span><h3>Agentsmith</h3><p>Authored and collected agent skills, rules, and reusable workflows.</p><a className="text-link" href="https://github.com/Sarthib7/agentsmith">Explore Agentsmith <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on GitHub</span></a></div>
-            </article>
-          </div>
-        </div>
-        <div className="work-controls" id="work-controls" hidden>
-          <div className="work-buttons"><button type="button" className="work-button" id="work-prev" aria-label="Previous projects" aria-controls="work-track" aria-disabled="true"><svg className="icon" aria-hidden="true"><use href="#arrow-left"/></svg></button><button type="button" className="work-button" id="work-next" aria-label="Next projects" aria-controls="work-track" aria-disabled="false"><svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button></div>
-          <div className="work-position"><span className="work-position-label" id="work-hint">SWIPE OR USE ARROWS</span><div className="progress-track" id="work-progress" role="progressbar" aria-label="Project gallery position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span className="progress-fill" id="work-progress-fill"></span></div></div>
-          <a className="text-link work-skip" href="#about">View experience <svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a>
-        </div>
-        <p className="sr-only" id="work-announcement" aria-live="polite" aria-atomic="true"></p>
+          ))}
+        </ProjectCarousel>
       </div>
+    </div>
+  </section>
+
+  <section className="project-index section" aria-labelledby="project-index-title">
+    <div className="container">
+      <div className="section-heading"><div><p className="eyebrow section-label">MORE TO EXPLORE</p><h2 id="project-index-title">More open-source work.</h2></div><a className="text-link" href="https://github.com/Sarthib7">All public repositories <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div>
+      <div className="project-index-grid">{additionalProjects.map((project, index) => <a className="index-project" href={project.url} key={project.name}><span className="index-project-number">{String(index + 1).padStart(2, '0')}</span><div className="index-project-main"><span className="index-project-tag">{project.category}</span><h3>{project.name}</h3><p>{project.description}</p></div><svg className="icon" aria-hidden="true"><use href="#external"/></svg></a>)}</div>
     </div>
   </section>
 
@@ -170,7 +162,7 @@ export default function App() {
     <div className="container od-grid about-grid">
       <div className="od-stack about-intro" data-reveal>
         <p className="eyebrow section-label">03 / EXPERIENCE</p>
-        <h2 id="about-title">PRODUCT &amp;<br />ENGINEERING.</h2>
+        <h2 id="about-title">Product thinking.<br />Engineering depth.</h2>
         <div className="od-cluster"><span className="tag">ENGINEER</span><span className="tag">PRODUCT BUILDER</span></div>
         <p>I am Sarthi Borkar, Head of Product at RouterLabs and Founder of Fundwise. My work covers AI, blockchain, stablecoins, and agentic payments.</p>
         <p>Work directly with me to turn a business need into a technical scope and working software.</p>
@@ -198,9 +190,11 @@ export default function App() {
     </div>
   </section>
 
+  <aside className="working-note"><div className="container"><p className="working-note-title">A product partner.<br />An engineer on the details.</p><div><p>For a focused build, a technical collaboration, or an engineering role.</p><div className="working-note-links"><a className="text-link" href="https://github.com/Sarthib7">GitHub <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://linkedin.com/in/sarthiborkar">LinkedIn <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://cal.com/sarthi">Talk with me <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div></div></div></aside>
+
   <section className="section contact" id="contact" aria-labelledby="contact-title">
     <div className="container od-grid contact-grid" data-reveal>
-      <div><p className="eyebrow section-label">CONTACT / YOUR NEXT PROJECT</p><h2 id="contact-title"><span>START WITH</span><span>ONE CLEAR</span><span>PRIORITY.</span></h2></div>
+      <div><p className="eyebrow section-label">CONTACT / YOUR NEXT PROJECT</p><h2 id="contact-title"><span>Start with</span><span>one clear</span><span>priority.</span></h2></div>
       <div className="od-stack contact-copy"><p>Tell me which task takes too much time or what your team needs to build. We can discuss a focused first project, including scope and budget.</p><a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a><span className="booking-destination">cal.com/sarthi</span></div>
     </div>
   </section>
@@ -208,8 +202,8 @@ export default function App() {
 
 <footer className="site-footer">
   <div className="container footer-row">
-    <a className="brand" href="#main" aria-label="Sarthi Borkar, return to top"><span className="brand-mark" aria-hidden="true"><span className="pixel-star"></span></span><span className="brand-word">sarthi<b>.</b></span></a>
-    <div className="od-field footer-meta"><span>© 2026 Sarthi Borkar</span><span>AI solutions for business. Berlin.</span></div>
+    <a className="brand" href="#main" aria-label="Sarthi Borkar, return to top"><span className="brand-mark" aria-hidden="true">sb</span><span className="brand-word">Sarthi Borkar<b>.</b></span></a>
+    <div className="od-field footer-meta"><span>© 2026 Sarthi Borkar</span><span>Product engineering. AI systems. Berlin.</span></div>
     <div className="od-cluster footer-links"><a className="text-link" href="https://github.com/Sarthib7">GitHub <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://x.com/sarthib7" aria-label="Sarthi on X">X <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="#main">Back to top <svg className="icon" aria-hidden="true"><use href="#arrow-up"/></svg></a></div>
   </div>
 </footer>

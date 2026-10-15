@@ -1,0 +1,43 @@
+.work-viewport { min-width: 0; }
+.project-gallery .work-track { position: relative; }
+.project-gallery.is-carousel .work-viewport { overflow: hidden; }
+.project-gallery.is-carousel .work-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.project-gallery.is-carousel .work-track::-webkit-scrollbar { display: none; }
+.project-gallery.is-carousel .work-card { flex: 0 0 min(580px, 72%); scroll-snap-align: start; }
+.project-gallery.is-carousel .work-track:focus-visible { outline-offset: -3px; }
+.project-gallery .work-art { height: 300px; min-height: 300px; padding: 24px; }
+.project-gallery .work-body { min-height: 265px; }
+.work-section:has(.is-carousel) .work-stage { padding-block: 32px; }
+.work-section.is-pinned .work-stage { position: sticky; top: var(--gallery-top); }
+.work-section.is-pinned .work-track { overflow: visible; scroll-snap-type: none; will-change: transform; }
+.work-section.is-pinned .work-track { transition: none; }
+.gallery-controls { display: flex; align-items: center; gap: 20px; padding-top: 22px; }
+.gallery-buttons { display: flex; gap: 8px; }
+.gallery-buttons button { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
+.gallery-buttons button:hover { background: var(--accent-soft); }
+.gallery-buttons button[aria-disabled="true"] { color: var(--muted); opacity: .4; cursor: default; }
+.gallery-hint, .gallery-readout { font: 600 .7rem/1.4 var(--mono); letter-spacing: .06em; color: var(--muted); }
+.gallery-readout { color: var(--accent); white-space: nowrap; }
+.gallery-progress { flex: 1; height: 2px; background: var(--line); overflow: hidden; }
+.gallery-progress-fill { display: block; width: 100%; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+@media (max-width: 760px) {
+  .project-gallery.is-carousel .work-card { flex-basis: 90%; }
+  .project-gallery.is-carousel .work-track { gap: 16px; }
+  .project-gallery .work-art { height: 240px; min-height: 240px; padding: 18px; }
+  .project-gallery .work-body { min-height: 290px; }
+  .gallery-controls { gap: 12px; }
+  .gallery-hint { display: none; }
+  .gallery-buttons button { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-section .work-stage { position: static; }
+  .project-gallery .work-track { transform: none !important; }
+}

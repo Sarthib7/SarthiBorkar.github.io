@@ -3,116 +3,57 @@ import { test, expect } from '@playwright/test';
 async function openApp(page) {
   await page.goto('/');
   await expect(page.locator('html')).toHaveClass(/\bjs\b/);
-  await expect(page.locator('.bot')).toHaveClass(/\bis-framed\b/);
 }
 
-const position = page => page.locator('#work-progress').getAttribute('aria-valuenow').then(Number);
-
-test('renders the source content and local image without hydration errors', async ({ page }) => {
+test('portfolio renders projects without browser errors', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await openApp(page);
-  await expect(page).toHaveTitle('Sarthi Borkar | AI Solutions for Business');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('BUSINESS.');
+  await expect(page).toHaveTitle('Sarthi Borkar | AI & Product Engineer');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('agents & people.');
   await expect(page.locator('.service-card')).toHaveCount(4);
-  await expect(page.locator('.work-card h3')).toHaveText(['Citadel', 'Kairen DealRail', 'IntentVault', 'Agentsmith']);
+  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight']);
+  await expect(page.locator('.work-track')).toHaveCSS('display', 'flex');
   await expect(page.locator('.timeline-entry')).toHaveCount(10);
   await expect(page.locator('.hero-actions .button')).toHaveAttribute('href', 'https://cal.com/sarthi');
-  await expect.poll(() => page.locator('.scene-backdrop').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(page.locator('.figure-art svg')).toHaveAttribute('role', 'img');
+  await page.locator('.skip-link').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('main')).toBeFocused();
   expect(errors).toEqual([]);
 });
 
-test('desktop gallery follows page scroll, controls, keys, and link focus', async ({ page }) => {
+test('workflow controls move the machine and keep the stage readout consistent', async ({ page }) => {
   await openApp(page);
-  const track = page.locator('#work-track');
-  await expect(page.locator('#work')).toHaveClass(/\bis-pinned\b/);
-  await page.locator('.hero-actions a[href="#work"]').click();
-  await expect.poll(() => position(page)).toBe(0);
-  await page.locator('#work-next').click();
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-  await expect(page.locator('#work-announcement')).toHaveText('Showing more projects.');
-  await page.locator('#work-prev').click();
-  await expect.poll(() => position(page)).toBe(0);
-  await page.mouse.wheel(0, 200);
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-  await track.focus();
-  await track.press('End');
-  await expect.poll(() => position(page)).toBe(100);
-  await expect(page.locator('#work-next')).toHaveAttribute('aria-disabled', 'true');
-  await track.press('Home');
-  await expect.poll(() => position(page)).toBe(0);
-  await track.press('ArrowRight');
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-  await track.press('Home');
-  await expect.poll(() => position(page)).toBe(0);
-  const lastLink = page.locator('.work-card').last().getByRole('link');
-  await lastLink.focus();
-  await expect(lastLink).toBeFocused();
-  await expect.poll(() => lastLink.evaluate(link => {
-    const card = link.closest('.work-card').getBoundingClientRect();
-    const viewport = document.querySelector('#work-viewport').getBoundingClientRect();
-    return card.left >= viewport.left - 2 && card.right <= viewport.right + 2;
-  })).toBe(true);
-  await expect(page.locator('.work-card').last()).toHaveClass(/\bis-current\b/);
+  const figure = page.locator('.workflow-figure');
+  const output = figure.locator('.figure-readout');
+  const carriage = figure.locator('[data-carriage]');
+  const initial = await carriage.evaluate(node => getComputedStyle(node).transform);
+  await figure.getByRole('button', { name: '03 Deliver' }).click();
+  await expect(output).toHaveText('03 / Deliver');
+  await expect(figure.getByRole('button', { name: '03 Deliver' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(figure.getByRole('button', { name: '01 Collect' })).toHaveAttribute('aria-pressed', 'false');
+  await expect.poll(() => carriage.evaluate(node => getComputedStyle(node).transform)).not.toBe(initial);
+  await figure.getByRole('button', { name: '02 Process' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(output).toHaveText('02 / Process');
+  await expect(figure.locator('.figure-caption')).toContainText('review');
 });
 
-test('short desktop uses native horizontal scrolling instead of pinning', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 600 });
-  await openApp(page);
-  await expect(page.locator('#work')).not.toHaveClass(/\bis-pinned\b/);
-  await expect(page.locator('#work-track')).toHaveCSS('overflow-x', 'auto');
-  await expect(page.locator('#work-hint')).toHaveText('EXPLORE WITH ARROWS');
-  await page.locator('#work-next').click();
-  await expect.poll(() => page.locator('#work-track').evaluate(track => track.scrollLeft)).toBeGreaterThan(0);
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-});
-
-test('navigation clears the current section when returning home or reaching contact', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 600 });
-  await openApp(page);
-  const nav = page.getByRole('navigation', { name: 'Main navigation' });
-  await nav.getByRole('link', { name: 'Services', exact: true }).click();
-  await expect(nav.getByRole('link', { name: 'Services', exact: true })).toHaveAttribute('aria-current', 'location');
-  await page.locator('.site-header .brand').click();
-  await expect(page).toHaveURL(/#main$/);
-  await expect(nav.locator('[aria-current]')).toHaveCount(0);
-  await nav.getByRole('link', { name: 'Experience', exact: true }).click();
-  await expect(nav.getByRole('link', { name: 'Experience', exact: true })).toHaveAttribute('aria-current', 'location');
-  await page.locator('#contact').evaluate(section => section.scrollIntoView({ block: 'start' }));
-  await expect(nav.locator('[aria-current]')).toHaveCount(0);
-});
-
-test('all links have labels and all fragment references have targets', async ({ page }) => {
-  await openApp(page);
-  const invalid = await page.locator('a, use').evaluateAll(elements => elements.flatMap(element => {
-    const href = element.getAttribute('href');
-    if (!href || href === '#') return ['Empty link'];
-    if (href.startsWith('#') && !document.getElementById(href.slice(1))) return ['Missing target: ' + href];
-    if (element.tagName.toLowerCase() === 'a' && !element.textContent.trim() && !element.getAttribute('aria-label')) return ['Missing label: ' + href];
-    return [];
-  }));
-  expect(invalid).toEqual([]);
-  await expect(page.locator('a')).toHaveCount(26);
-  await expect(page.getByRole('button', { includeHidden: true })).toHaveCount(3);
-});
-
-test('mobile menu closes on Escape, outside click, focus exit, and anchor selection', async ({ page }) => {
+test('mobile navigation closes on Escape, outside click, focus exit and selection', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openApp(page);
   const toggle = page.locator('#menu-toggle');
   const menu = page.locator('#nav-links');
-  await expect(toggle).toBeVisible();
   await expect(menu).toBeHidden();
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  await expect(toggle.locator('use')).toHaveAttribute('href', '#close');
   await page.keyboard.press('Escape');
   await expect(menu).toBeHidden();
   await expect(toggle).toBeFocused();
   await toggle.click();
-  await page.locator('h1').click();
+  await page.locator('.hero-copy').click();
   await expect(menu).toBeHidden();
   await toggle.click();
   await page.locator('.hero-actions a[href="#work"]').focus();
@@ -120,106 +61,171 @@ test('mobile menu closes on Escape, outside click, focus exit, and anchor select
   await toggle.click();
   await menu.getByRole('link', { name: 'Services', exact: true }).click();
   await expect(menu).toBeHidden();
-  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('#services')).toBeFocused();
   await expect(page).toHaveURL(/#services$/);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test('mobile project controls and native rail scrolling update progress', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openApp(page);
-  await expect(page.locator('#work')).not.toHaveClass(/\bis-pinned\b/);
-  await expect(page.locator('#work-hint')).toHaveText('SWIPE OR USE ARROWS');
-  await page.locator('#work-next').click();
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-  await page.locator('#work-prev').click();
-  await expect.poll(() => position(page)).toBe(0);
-  await expect(page.locator('#work-prev')).toHaveAttribute('aria-disabled', 'true');
-  await page.locator('#work-track').evaluate(track => { track.scrollLeft = track.scrollWidth; });
-  await expect.poll(() => position(page)).toBe(100);
-  await expect(page.locator('#work-next')).toHaveAttribute('aria-disabled', 'true');
-});
-
-test('the scene stays inside its console across screen widths', async ({ page }) => {
+test('all project links stay visible and the figure fits narrow screens', async ({ page }) => {
   await openApp(page);
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
-    await expect.poll(() => page.evaluate(() => {
-      const scene = document.querySelector('.scene').getBoundingClientRect();
-      const screen = document.querySelector('.game-screen').getBoundingClientRect();
-      return scene.left >= screen.left && scene.right <= screen.right
-        && document.documentElement.scrollWidth <= innerWidth;
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await expect(page.locator('.work-card')).toHaveCount(6);
+    for (const link of await page.locator('.work-card a').all()) {
+      await link.focus();
+      await expect(link).toBeInViewport();
+    }
+    expect(await page.locator('.figure-art svg').evaluate(svg => {
+      const art = svg.getBoundingClientRect();
+      return art.left >= 0 && art.right <= innerWidth;
     })).toBe(true);
   }
 });
 
-test('reduced motion shows a project grid and responds to preference changes', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
+test('links have labels, fragment targets exist and project URLs are preserved', async ({ page }) => {
   await openApp(page);
-  const work = page.locator('#work');
-  const track = page.locator('#work-track');
-  const art = page.locator('#sarthi-console');
-  await expect(work).not.toHaveClass(/\bis-pinned\b/);
-  await expect(track).toHaveCSS('display', 'grid');
-  await expect(page.locator('#work-controls')).toBeHidden();
-  await expect(art).toHaveAttribute('data-player-state', 'idle');
-  await expect(page.locator('.bot')).toHaveAttribute('data-frame', '0');
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect(work).toHaveClass(/\bis-pinned\b/);
-  await expect(page.locator('#work-controls')).toBeVisible();
-  await page.locator('.hero-actions a[href="#work"]').click();
-  await page.locator('#work-next').click();
-  await expect.poll(() => position(page)).toBeGreaterThan(0);
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(work).not.toHaveClass(/\bis-pinned\b/);
-  await expect(track).toHaveCSS('display', 'grid');
-  await expect(track).toHaveCSS('transform', 'none');
-  await expect(page.locator('#work-controls')).toBeHidden();
-  await expect(art).toHaveAttribute('data-player-state', 'idle');
-  await expect(page.locator('.bot')).toHaveAttribute('data-frame', '0');
+  expect(await page.locator('a, use').evaluateAll(elements => elements.flatMap(element => {
+    const href = element.getAttribute('href');
+    if (!href || href === '#') return ['Empty link'];
+    if (href.startsWith('#') && !document.getElementById(href.slice(1))) return ['Missing target: ' + href];
+    if (element.tagName.toLowerCase() === 'a' && !element.textContent.trim() && !element.getAttribute('aria-label')) return ['Missing label: ' + href];
+    return [];
+  }))).toEqual([]);
+  for (const link of await page.locator('.work-card a').all()) await expect(link).toHaveAttribute('href', /^(https:\/\/|#contact)/);
 });
 
-test('scroll advances the pixel character and experience expands natively', async ({ page }) => {
+test('reduced motion removes movement but keeps workflow controls usable', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await openApp(page);
-  expect(await page.locator('.player-sprite').evaluate(canvas =>
-    canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data.some((value, index) => index % 4 === 3 && value > 0)
-  )).toBe(true);
-  const frames = new Set();
-  const states = new Set();
-  for (const top of [0, 80, 160, 240, 320, 400]) {
-    await page.evaluate(async y => {
-      window.scrollTo(0, y);
-      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    }, top);
-    frames.add(await page.locator('.bot').getAttribute('data-frame'));
-    states.add(await page.locator('#sarthi-console').getAttribute('data-player-state'));
-  }
-  expect(frames.size).toBeGreaterThan(2);
-  expect(states.size).toBeGreaterThan(2);
-  const archive = page.locator('.experience-archive');
-  await expect(archive.locator('.timeline')).toBeHidden();
-  await archive.locator('summary').click();
-  await expect(archive).toHaveAttribute('open', '');
-  await expect(archive.locator('.timeline-entry')).toHaveCount(8);
-  await expect(archive.locator('.timeline-entry').first()).toBeVisible();
-  await archive.locator('summary').click();
-  await expect(archive.locator('.timeline')).toBeHidden();
+  await expect(page.locator('[data-carriage]')).toHaveCSS('transition-duration', '0s');
+  await page.getByRole('button', { name: '03 Deliver' }).click();
+  await expect(page.locator('.figure-readout')).toHaveText('03 / Deliver');
+  await expect(page.locator('.work-track')).toHaveCSS('display', 'grid');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.getByRole('button', { name: '01 Collect' }).click();
+  await expect(page.locator('.figure-readout')).toHaveText('01 / Collect');
 });
 
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
-  test('prerendered content, navigation, projects, and experience remain usable', async ({ page }) => {
+  test('content, navigation, illustration and experience remain usable', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('html')).not.toHaveClass(/\bjs\b/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('BUSINESS.');
     await expect(page.locator('#nav-links')).toBeVisible();
     await expect(page.locator('#menu-toggle')).toBeHidden();
+    await expect(page.locator('.figure-art svg')).toBeVisible();
+    await expect(page.locator('.figure-controls')).toBeHidden();
+    await expect(page.locator('.work-card')).toHaveCount(6);
     await expect(page.locator('#work-track')).toHaveCSS('display', 'grid');
-    await expect(page.locator('.work-card')).toHaveCount(4);
     await expect(page.locator('#work-controls')).toBeHidden();
-    await page.locator('.experience-archive summary').click();
+    for (const link of await page.locator('.work-card a').all()) {
+      await link.focus();
+      await expect(link).toBeInViewport();
+    }
+    await page.locator('.experience-archive summary').focus();
+    await page.keyboard.press('Enter');
     await expect(page.locator('.experience-archive .timeline')).toBeVisible();
     await expect(page.locator('.experience-archive .timeline-entry')).toHaveCount(8);
   });
+});
+
+const galleryPosition = page => page.locator('#work-progress').getAttribute('aria-valuenow').then(Number);
+
+test('desktop scroll carousel follows scroll, buttons, keys and link focus', async ({ page }) => {
+  await openApp(page);
+  const track = page.locator('#work-track');
+  await expect(page.locator('#work')).toHaveClass(/is-pinned/);
+  await page.locator('.hero-actions a[href="#work"]').click();
+  await expect.poll(() => galleryPosition(page)).toBe(0);
+  await page.locator('#work-next').click();
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await page.locator('#work-prev').click();
+  await expect.poll(() => galleryPosition(page)).toBe(0);
+  await page.mouse.wheel(0, 160);
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await track.focus();
+  await track.press('End');
+  await expect.poll(() => galleryPosition(page)).toBe(100);
+  await expect(page.locator('#work-next')).toHaveAttribute('aria-disabled', 'true');
+  await track.press('Home');
+  await expect.poll(() => galleryPosition(page)).toBe(0);
+  await track.press('ArrowRight');
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await track.press('Home');
+  await page.locator('.work-card a').last().focus();
+  await expect.poll(() => page.locator('.work-card').last().evaluate(card => {
+    const rect = card.getBoundingClientRect();
+    const viewport = document.querySelector('.work-viewport').getBoundingClientRect();
+    return rect.left >= viewport.left - 2 && rect.right <= viewport.right + 2;
+  })).toBe(true);
+});
+
+test('mobile carousel uses native swipe and stops controls at both ends', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openApp(page);
+  await expect(page.locator('#work')).not.toHaveClass(/is-pinned/);
+  await expect(page.locator('#work-track')).toHaveCSS('overflow-x', 'auto');
+  await expect(page.locator('#work-prev')).toHaveAttribute('aria-disabled', 'true');
+  await page.locator('#work-next').click();
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await page.locator('#work-track').evaluate(track => { track.scrollLeft = track.scrollWidth; });
+  await expect.poll(() => galleryPosition(page)).toBe(100);
+  await expect(page.locator('#work-next')).toHaveAttribute('aria-disabled', 'true');
+  await page.locator('#work-track').focus();
+  await page.keyboard.press('Home');
+  await expect.poll(() => galleryPosition(page)).toBe(0);
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await page.keyboard.press('End');
+  await expect.poll(() => galleryPosition(page)).toBe(100);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('short screens and live reduced-motion changes keep every project reachable', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 600 });
+  await openApp(page);
+  await expect(page.locator('#work')).not.toHaveClass(/is-pinned/);
+  await page.locator('#work-next').click();
+  await expect.poll(() => galleryPosition(page)).toBeGreaterThan(0);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await expect(page.locator('#work')).toHaveClass(/is-pinned/);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('#work')).not.toHaveClass(/is-pinned/);
+  await expect(page.locator('#work-track')).toHaveCSS('display', 'grid');
+  await expect(page.locator('#work-controls')).toBeHidden();
+  await expect(page.locator('#work-track')).toHaveCSS('transform', 'none');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.locator('#work')).toHaveClass(/is-pinned/);
+});
+
+test('each featured project has loaded local artwork', async ({ page }) => {
+  await openApp(page);
+  const images = page.locator('.work-art img');
+  await expect(images).toHaveCount(6);
+  for (const image of await images.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
+  }
+});
+
+test('features the six projects selected by Sarthi and keeps other public work discoverable', async ({ page }) => {
+  await openApp(page);
+  await expect(page.locator('.work-card h3')).toHaveText(['FalconOS', 'Fundwise', 'Citadel', 'Noesora', 'Exbridge', 'LastLight']);
+  await expect(page.locator('.project-index .index-project')).toHaveCount(3);
+  await expect(page.locator('.project-index')).toContainText('Agentsmith');
+  await expect(page.locator('.project-index')).toContainText('Kairen DealRail');
+  await expect(page.locator('.project-index')).toContainText('IntentVault');
+  await expect(page.locator('.gallery-readout')).toHaveText('01 / 06');
+});
+
+test('carousel remeasures when upstream content changes height', async ({ page }) => {
+  await openApp(page);
+  await expect(page.locator('#work')).toHaveClass(/is-pinned/);
+  await page.locator('.hero').evaluate(hero => { hero.style.paddingTop = '300px'; });
+  const track = page.locator('#work-track');
+  await track.evaluate(element => element.focus({ preventScroll: true }));
+  await track.press('Home');
+  await expect.poll(() => page.locator('#work').evaluate(work => Math.abs(
+    work.getBoundingClientRect().top - document.querySelector('.site-header').offsetHeight
+  ))).toBeLessThanOrEqual(2);
+  await expect.poll(() => galleryPosition(page)).toBe(0);
 });
