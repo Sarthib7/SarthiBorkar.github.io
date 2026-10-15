@@ -52,12 +52,12 @@ function scene({ bounds, bottom = -18, top, label, name, azimuth = 48 }) {
   const topLine = (x1, y1, x2, y2, z, tone = 'lo') => {
     parts.push(k.lineSvg(k.lineOnTop([x1, y1], [x2, y2], z, P), { tone, free: true }));
   };
-  const emit = () => {
+  const emit = (motion = '') => {
     let svg = k.figureSvg({
       width: WIDTH,
       height: HEIGHT,
       label,
-      body: parts,
+      body: motion ? [`<style>${motion}@media(prefers-reduced-motion:reduce){.moving{animation:none!important}}</style>`, ...parts] : parts,
       standalone: 'light',
       className: `project-object project-object-${name}`,
     });
@@ -368,3 +368,108 @@ citadel();
 kairen();
 intentVault();
 agentsmith();
+
+function falconOS() {
+  // Evidence console: bolted chassis, three signal modules, and a sliding risk gate.
+  const g = scene({ name: 'falconos', label: 'Isometric risk-check console with three evidence modules and a moving verification gate.', bounds: { x: -122, y: -70, w: 244, d: 140, r: 5 }, top: 92 });
+  const { box, closed, dots3, parts, emit } = g;
+  for (const x of [-110, 98]) for (const y of [-58, 47]) box(x, y, 12, 12, -15, 7, 'lo');
+  box(-122, -70, 244, 140, -8, 8, 'mid');
+  closed(-116, -64, 232, 128, 0);
+  for (const x of [-103, -28, 47]) {
+    box(x, -47, 58, 78, 0, 9, 'mid');
+    box(x + 4, -43, 50, 70, 9, 39, 'mid');
+    box(x + 8, -39, 42, 62, 48, 3, 'hi');
+    closed(x + 9, -38, 40, 60, 51);
+    for (let i = 0; i < 5; i++) box(x + 13, -32 + i * 9, 30, 3, 51, 1, 'lo');
+    for (let i = 0; i < 3; i++) box(x + 10 + i * 14, 28, 9, 5, 13, 5, 'hi', i === 1);
+    dots3([[x + 8, -39, 52], [x + 49, -39, 52], [x + 8, 21, 52], [x + 49, 21, 52]], 'hi', .6);
+  }
+  for (const y of [-58, 43]) {
+    box(-112, y, 224, 7, 55, 5, 'mid');
+    for (const x of [-112, 104]) box(x, y, 8, 7, 0, 55, 'mid');
+  }
+  // Gate rides along the x rails; its short travel stays inside the chassis.
+  parts.push('<g class="moving evidence-gate">');
+  box(-97, -60, 12, 112, 60, 5, 'hi', true);
+  for (const y of [-61, 42]) box(-101, y, 20, 12, 57, 11, 'hi');
+  box(-96, -20, 10, 32, 65, 12, 'hi', true);
+  parts.push('</g>');
+  const a = k.iso([0, 0, 0], g.P), b = k.iso([180, 0, 0], g.P);
+  emit(`.evidence-gate{animation:evidence-pass 7s ease-in-out infinite}@keyframes evidence-pass{0%,15%,100%{transform:translate(0,0)}50%,65%{transform:translate(${b[0]-a[0]}px,${b[1]-a[1]}px)}}`);
+}
+
+function fundwise() {
+  // Shared-payment sorter: three receipt trays, a divider rack, and a payout drawer.
+  const g = scene({ name: 'fundwise', label: 'Isometric shared-payment sorter with three receipt trays and a moving settlement drawer.', bounds: { x: -125, y: -72, w: 250, d: 160, r: 5 }, top: 84 });
+  const { box, closed, dots3, parts, emit } = g;
+  for (const x of [-112, 99]) for (const y of [-59, 62]) box(x, y, 13, 13, -15, 7, 'lo');
+  box(-125, -72, 250, 148, -8, 8, 'mid');
+  closed(-119, -66, 238, 136, 0);
+  box(-113, -59, 226, 9, 0, 72, 'mid');
+  for (const x of [-113, 105]) box(x, -50, 8, 110, 0, 45, 'mid');
+  for (const x of [-97, -29, 39]) {
+    box(x, -42, 58, 67, 0, 6, 'mid');
+    for (const side of [0, 54]) box(x + side, -42, 4, 67, 6, 18, 'mid');
+    box(x + 4, -42, 50, 4, 6, 18, 'mid');
+    for (let sheet = 0; sheet < 3; sheet++) {
+      box(x + 8, -33 + sheet * 2, 42, 45, 6 + sheet * 2, 1.5, 'hi');
+      closed(x + 10, -31 + sheet * 2, 38, 41, 7.5 + sheet * 2, 'faint');
+    }
+    box(x + 19, 22, 20, 6, 6, 6, 'hi');
+    box(x + 18, -50, 22, 3, 54, 11, 'hi');
+    dots3([[x + 6, -45, 66], [x + 51, -45, 66]], 'hi', .6);
+  }
+  box(-106, 35, 212, 26, 0, 6, 'lo');
+  parts.push('<g class="moving payout-drawer">');
+  box(-99, 35, 198, 25, 6, 5, 'mid');
+  box(-99, 57, 198, 5, 6, 15, 'hi');
+  box(-20, 62, 40, 5, 11, 6, 'hi', true);
+  for (let i = 0; i < 4; i++) box(-72 + i * 38, 39, 28, 14, 11, 3, 'hi');
+  parts.push('</g>');
+  const a = k.iso([0, 0, 0], g.P), b = k.iso([0, 14, 0], g.P);
+  emit(`.payout-drawer{animation:shared-settlement 5s ease-in-out infinite}@keyframes shared-settlement{0%,15%,100%{transform:translate(0,0)}45%,65%{transform:translate(${b[0]-a[0]}px,${b[1]-a[1]}px)}}`);
+}
+
+falconOS();
+fundwise();
+
+function lastLight() {
+  // Two-player tabletop arcade: a cabinet, recessed board, controls, and moving player piece.
+  const g = scene({ name: 'lastlight', label: 'Isometric two-player tabletop arcade with a moving player piece on a recessed game board.', bounds: { x: -116, y: -78, w: 232, d: 156, r: 6 }, top: 68 });
+  const { box, closed, dots3, parts, emit } = g;
+  for (const x of [-101, 88]) for (const y of [-63, 50]) box(x, y, 13, 13, -16, 9, 'lo');
+  box(-116, -78, 232, 156, -7, 8, 'mid');
+  box(-108, -70, 216, 140, 1, 31, 'mid');
+  for (const x of [-108, 102]) box(x, -70, 6, 140, 32, 9, 'hi');
+  for (const y of [-70, 64]) box(-102, y, 204, 6, 32, 9, 'hi');
+  box(-74, -46, 148, 92, 32, 3, 'lo');
+  closed(-72, -44, 144, 88, 35, 'hi');
+  // The grid is made of shallow inlaid tiles inside the board, not floating marks.
+  for (let row = 0; row < 4; row++) for (let column = 0; column < 6; column++) {
+    box(-66 + column * 22, -38 + row * 20, 20, 18, 35, .7, 'lo');
+  }
+  for (const x of [-100, 78]) {
+    box(x, -41, 22, 82, 32, 4, 'mid');
+    box(x + 6, -27, 10, 13, 36, 2, 'lo');
+    box(x + 9, -24, 4, 7, 38, 12, 'hi');
+    box(x + 5, -27, 12, 13, 50, 5, 'hi');
+    for (let button = 0; button < 3; button++) box(x + 6, 5 + button * 10, 10, 7, 36, 3, 'hi', button === 1);
+  }
+  for (const y of [-65, 52]) {
+    box(-22, y, 44, 10, 32, 3, 'mid');
+    for (let lamp = 0; lamp < 4; lamp++) box(-16 + lamp * 9, y + 3, 5, 4, 35, 1, 'hi');
+  }
+  dots3([[-103, -65, 41], [104, -65, 41], [-103, 65, 41], [104, 65, 41]], 'hi', .65);
+  // A small opponent stays at the far end of the board.
+  box(40, 23, 14, 12, 36, 5, 'hi');
+  box(43, 25, 8, 8, 41, 5, 'mid');
+  parts.push('<g class="moving player-piece">');
+  box(-57, -29, 14, 12, 36, 5, 'hi', true);
+  box(-54, -27, 8, 8, 41, 5, 'hi', true);
+  parts.push('</g>');
+  const a = k.iso([0, 0, 0], g.P), b = k.iso([66, 20, 0], g.P);
+  emit(`.player-piece{animation:lastlight-play 6s ease-in-out infinite}@keyframes lastlight-play{0%,15%,100%{transform:translate(0,0)}45%,65%{transform:translate(${b[0]-a[0]}px,${b[1]-a[1]}px)}}`);
+}
+
+lastLight();

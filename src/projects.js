@@ -3,14 +3,14 @@ export const projects = [
     name: 'FalconOS', category: 'AGENT INFRASTRUCTURE', color: 'stone', status: 'Devnet prototype',
     description: 'An agent-first finance interface for market evidence, risk checks, and unsigned Solana Devnet transaction proposals.',
     tags: ['Agent tooling', 'Solana', 'Risk evidence'],
-    media: './assets/portfolio/falcon-symbol.png', variant: 'logo', caption: 'Evidence before execution.',
+    media: './assets/projects/falconos.svg', variant: 'object', caption: 'Evidence before execution.',
     url: 'https://agents.falconos.markets', linkLabel: 'View agent interface',
   },
   {
     name: 'Fundwise', category: 'SHARED FINANCE', color: 'sky', status: 'Product development',
     description: 'Shared finance for private groups. Track expenses, review balances, and coordinate USDC settlement.',
     tags: ['Group finance', 'USDC', 'Solana'],
-    media: './assets/portfolio/fundwise-product.png', variant: 'product', caption: 'Product concept',
+    media: './assets/projects/fundwise.svg', variant: 'object', caption: 'Shared finance, in motion.',
     url: 'https://fundwise.fun', linkLabel: 'Visit Fundwise',
   },
   {
@@ -38,7 +38,7 @@ export const projects = [
     name: 'LastLight', category: 'PRIVATE MULTIPLAYER', color: 'clay', status: 'In development',
     description: 'A Solana multiplayer game project focused on private play, match rooms, and onchain settlement.',
     tags: ['Game development', 'Solana', 'MagicBlock'],
-    media: './assets/portfolio/lastlight-cover.png', variant: 'cover', caption: 'Game cover',
+    media: './assets/projects/lastlight.svg', variant: 'object', caption: 'Private play. Shared arena.',
     url: '#contact', linkLabel: 'Discuss LastLight',
   },
 
