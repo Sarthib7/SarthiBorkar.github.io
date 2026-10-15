@@ -12,6 +12,7 @@ export default function App() {
     <>
 <svg className="symbol-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
+    <symbol id="brand-s" viewBox="0 0 40 40"><path d="M29 9H16l-7 7 20 9-7 7H9" fill="none" stroke="currentColor" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round"/></symbol>
     <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
     <symbol id="arrow-left" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
     <symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol>
@@ -31,9 +32,9 @@ export default function App() {
 
 <header className="site-header" id="top">
   <div className="container header-row">
-    <a className="brand" href="#main" aria-label="Sarthi Borkar, home">
-      <span className="brand-mark" aria-hidden="true">sb</span>
-      <span className="brand-word">Sarthi Borkar<b>.</b></span>
+    <a className="brand" href="#main" aria-label="Sarthiii, home">
+      <span className="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#brand-s"/></svg></span>
+      <span className="brand-word">Sarthiii</span>
     </a>
     <button className="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation" hidden>
       <svg className="icon" aria-hidden="true"><use href="#menu"/></svg>
@@ -55,7 +56,6 @@ export default function App() {
     <div className="container">
       <div className="od-grid hero-grid">
         <div className="od-stack hero-intro">
-          <p className="hero-kicker"><span className="pixel-star" aria-hidden="true"></span> INDEPENDENT ENGINEER / BERLIN</p>
           <p className="hero-signature">Sarthi Borkar</p>
           <h1 id="hero-title"><span>Engineering for</span><span className="hero-title-serif">agents &amp; people.</span></h1>
           <p className="hero-copy">I build AI tools, payment systems, and products people can use. My work connects product thinking with engineering across software, finance, and robotics.</p>
@@ -65,7 +65,7 @@ export default function App() {
           </div>
           <div className="od-cluster hero-skills" aria-label="Services"><span>AI SYSTEMS</span><span>PRODUCT ENGINEERING</span><span>AGENT PAYMENTS</span></div>
         </div>
-        <div className="hero-visual"><WorkflowFigure /><p className="hero-project-note"><span className="pixel-star" aria-hidden="true"/> From a clear problem to a working system.</p></div>
+        <div className="hero-visual"><WorkflowFigure /></div>
       </div>
       <div className="hero-bottom">
         <a className="scroll-hint" href="#services"><svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg> BUILT WITH PURPOSE</a>
@@ -83,40 +83,34 @@ export default function App() {
     <div className="container">
       <p className="eyebrow section-label">01 / HOW I CAN HELP</p>
       <div className="section-heading" data-reveal>
-        <h2 id="services-title">Less busywork.<br />More useful software.</h2>
-        <p>For local businesses, the starting point is often repetitive admin. For startups, it may be a new product or integration. Choose the support your team needs.</p>
+        <h2 id="services-title">What I build.</h2>
       </div>
       <div className="od-grid services-grid">
         <article className="service-card service-card-blue" data-reveal>
           <div className="service-top"><span className="eyebrow">01 / AI SOLUTIONS</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#chip"/></svg></span></div>
-          <h3>Spend less time<br />on manual work.</h3>
-          <p>Turn document processing and repetitive admin into workflows your team can use. I connect the tools you already work with.</p>
-          <ul><li>Document processing and data entry</li><li>Internal tools connected to your systems</li></ul>
+          <h3>AI automation</h3>
+          <p>Document workflows and internal tools connected to your systems.</p>
           <a className="text-link" href="https://cal.com/sarthi">Discuss automation <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card service-card-sky" data-reveal>
           <div className="service-top"><span className="eyebrow">02 / PRIVATE AI</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#lock"/></svg></span></div>
-          <h3>Put company<br />knowledge to work.</h3>
-          <p>Help your team find answers in internal documents. Define who can access the information and where the AI runs.</p>
-          <ul><li>Private or self-hosted AI tools</li><li>Document search and access controls</li></ul>
+          <h3>Private AI</h3>
+          <p>Search company knowledge with control over access and hosting.</p>
           <a className="text-link" href="https://cal.com/sarthi">Discuss private AI <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card service-card-yellow" data-reveal>
           <div className="service-top"><span className="eyebrow">03 / AGENT PAYMENTS<br />&amp; STABLECOINS</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#payment"/></svg></span></div>
-          <h3>Build payments<br />into your product.</h3>
-          <p>For startups building AI agents or stablecoin products. I develop payment flows for paid tools and transaction tracking.</p>
-          <ul><li>Paid tool access for AI agents</li><li>Stablecoin settlement and payment records</li></ul>
+          <h3>Agent payments</h3>
+          <p>Paid tools for agents, stablecoin settlement, and transaction records.</p>
           <a className="text-link" href="https://cal.com/sarthi">Discuss payments <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card" data-reveal>
           <div className="service-top"><span className="eyebrow">04 / CONSULTING</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#path"/></svg></span></div>
-          <h3>Choose the right<br />project to build.</h3>
-          <p>Decide where AI can add value before you invest in development. Get clear requirements and a practical implementation plan.</p>
-          <ul><li>Workflow review and technical options</li><li>Defined pilot scope and delivery priorities</li></ul>
+          <h3>Technical consulting</h3>
+          <p>A clear technical scope and a practical plan for your next build.</p>
           <a className="text-link" href="https://cal.com/sarthi">Plan your project <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
       </div>
-      <p className="service-note"><span className="pixel-star" aria-hidden="true"></span>Start with one workflow. Agree a clear scope, build a pilot, and review it with your team before expanding.</p>
     </div>
   </section>
 
@@ -126,7 +120,6 @@ export default function App() {
         <p className="eyebrow section-label">02 / SELECTED PROJECTS</p>
         <div className="section-heading">
           <h2 id="work-title">Selected work<span className="heading-period">.</span></h2>
-          <p>Projects across AI infrastructure, shared finance, developer tools, robotics, and multiplayer games.</p>
         </div>
         <ProjectCarousel>
           {projects.map((project, index) => (
@@ -155,10 +148,8 @@ export default function App() {
     <div className="container od-grid about-grid">
       <div className="od-stack about-intro" data-reveal>
         <p className="eyebrow section-label">03 / EXPERIENCE</p>
-        <h2 id="about-title">Product thinking.<br />Engineering depth.</h2>
-        <div className="od-cluster"><span className="tag">ENGINEER</span><span className="tag">PRODUCT BUILDER</span></div>
-        <p>I am Sarthi Borkar, Head of Product at RouterLabs and Founder of Fundwise. My work covers AI, blockchain, stablecoins, and agentic payments.</p>
-        <p>Work directly with me to turn a business need into a technical scope and working software.</p>
+        <h2 id="about-title">Product-minded.<br />Hands-on.</h2>
+        <p>I build AI and payment products. Head of Product at RouterLabs. Founder of Fundwise.</p>
         <div className="about-fact"><svg className="icon" aria-hidden="true"><use href="#pin"/></svg> Based in Berlin, Germany</div>
       </div>
       <div>
@@ -187,15 +178,15 @@ export default function App() {
 
   <section className="section contact" id="contact" aria-labelledby="contact-title">
     <div className="container od-grid contact-grid" data-reveal>
-      <div><p className="eyebrow section-label">CONTACT / YOUR NEXT PROJECT</p><h2 id="contact-title"><span>Start with</span><span>one clear</span><span>priority.</span></h2></div>
-      <div className="od-stack contact-copy"><p>Tell me which task takes too much time or what your team needs to build. We can discuss a focused first project, including scope and budget.</p><a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a><span className="booking-destination">cal.com/sarthi</span></div>
+      <div><h2 id="contact-title"><span>Start with</span><span>one clear</span><span>priority.</span></h2></div>
+      <div className="od-stack contact-copy"><p>Have a project or an engineering role in mind? Let’s talk.</p><a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a><span className="booking-destination">cal.com/sarthi</span></div>
     </div>
   </section>
 </main>
 
 <footer className="site-footer">
   <div className="container footer-row">
-    <a className="brand" href="#main" aria-label="Sarthi Borkar, return to top"><span className="brand-mark" aria-hidden="true">sb</span><span className="brand-word">Sarthi Borkar<b>.</b></span></a>
+    <a className="brand" href="#main" aria-label="Sarthiii, return to top"><span className="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#brand-s"/></svg></span><span className="brand-word">Sarthiii</span></a>
     <div className="od-field footer-meta"><span>© 2026 Sarthi Borkar</span><span>Product engineering. AI systems. Berlin.</span></div>
     <div className="od-cluster footer-links"><a className="text-link" href="https://github.com/Sarthib7">GitHub <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://x.com/sarthib7" aria-label="Sarthi on X">X <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="#main">Back to top <svg className="icon" aria-hidden="true"><use href="#arrow-up"/></svg></a></div>
   </div>
