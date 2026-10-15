@@ -24,21 +24,38 @@ test('portfolio renders projects without browser errors', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('workflow controls move the machine and keep the stage readout consistent', async ({ page }) => {
+test('workflow automatically moves through all three stages without controls', async ({ page }) => {
+  await page.clock.install();
   await openApp(page);
   const figure = page.locator('.workflow-figure');
-  const output = figure.locator('.figure-readout');
   const carriage = figure.locator('[data-carriage]');
+  await expect(figure.locator('button')).toHaveCount(0);
+  await expect(figure.locator('.figure-scan')).toHaveCount(0);
+  await expect(figure).toHaveAttribute('data-stage', '0');
   const initial = await carriage.evaluate(node => getComputedStyle(node).transform);
-  await figure.getByRole('button', { name: '03 Deliver' }).click();
-  await expect(output).toHaveText('03 / Deliver');
-  await expect(figure.getByRole('button', { name: '03 Deliver' })).toHaveAttribute('aria-pressed', 'true');
-  await expect(figure.getByRole('button', { name: '01 Collect' })).toHaveAttribute('aria-pressed', 'false');
+  await page.clock.runFor(2400);
+  await expect(figure.locator('.figure-readout')).toHaveText('02 / Process');
+  await page.clock.runFor(700);
   await expect.poll(() => carriage.evaluate(node => getComputedStyle(node).transform)).not.toBe(initial);
-  await figure.getByRole('button', { name: '02 Process' }).focus();
-  await page.keyboard.press('Enter');
-  await expect(output).toHaveText('02 / Process');
-  await expect(figure.locator('.figure-caption')).toContainText('review');
+  await page.clock.runFor(1700);
+  await expect(figure.locator('.figure-readout')).toHaveText('03 / Deliver');
+  await page.clock.runFor(2400);
+  await expect(figure.locator('.figure-readout')).toHaveText('01 / Collect');
+});
+
+test('automatic diagram follows the cursor and respects reduced motion', async ({ page }) => {
+  await openApp(page);
+  const machine = page.locator('.figure-machine');
+  const art = page.locator('.figure-art');
+  const initialTilt = await machine.evaluate(node => getComputedStyle(node).transform);
+  const bounds = await art.boundingBox();
+  await page.mouse.move(bounds.x + bounds.width * .8, bounds.y + bounds.height * .3);
+  await expect.poll(() => machine.evaluate(node => getComputedStyle(node).transform)).not.toBe(initialTilt);
+  expect(await art.evaluate(node => parseFloat(node.style.getPropertyValue('--pointer-x')))).toBeCloseTo(80, 2);
+  await page.mouse.move(0, 0);
+  await expect.poll(() => art.evaluate(node => node.style.getPropertyValue('--pointer-x'))).toBe('');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(machine).toHaveCSS('transform', 'none');
 });
 
 test('mobile navigation closes on Escape, outside click, focus exit and selection', async ({ page }) => {
@@ -94,16 +111,17 @@ test('links have labels, fragment targets exist and project URLs are preserved',
   for (const link of await page.locator('.work-card a').all()) await expect(link).toHaveAttribute('href', /^(https:\/\/|#contact)/);
 });
 
-test('reduced motion removes movement but keeps workflow controls usable', async ({ page }) => {
+test('reduced motion stops automatic stages and resumes when enabled', async ({ page }) => {
+  await page.clock.install();
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openApp(page);
   await expect(page.locator('[data-carriage]')).toHaveCSS('transition-duration', '0s');
-  await page.getByRole('button', { name: '03 Deliver' }).click();
-  await expect(page.locator('.figure-readout')).toHaveText('03 / Deliver');
+  await page.clock.runFor(7200);
+  await expect(page.locator('.workflow-figure')).toHaveAttribute('data-stage', '0');
   await expect(page.locator('.work-track')).toHaveCSS('display', 'grid');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.getByRole('button', { name: '01 Collect' }).click();
-  await expect(page.locator('.figure-readout')).toHaveText('01 / Collect');
+  await page.clock.runFor(2400);
+  await expect(page.locator('.figure-readout')).toHaveText('02 / Process');
 });
 
 test.describe('without JavaScript', () => {
@@ -113,7 +131,7 @@ test.describe('without JavaScript', () => {
     await expect(page.locator('#nav-links')).toBeVisible();
     await expect(page.locator('#menu-toggle')).toBeHidden();
     await expect(page.locator('.figure-art svg')).toBeVisible();
-    await expect(page.locator('.figure-controls')).toBeHidden();
+    await expect(page.locator('.figure-controls')).toHaveCount(0);
     await expect(page.locator('.work-card')).toHaveCount(6);
     await expect(page.locator('#work-track')).toHaveCSS('display', 'grid');
     await expect(page.locator('#work-controls')).toBeHidden();
