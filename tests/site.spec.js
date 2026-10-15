@@ -26,16 +26,18 @@ test('portfolio renders projects without browser errors', async ({ page }) => {
 
 test('minimal page keeps services and contact usable without the removed copy', async ({ page }) => {
   await openApp(page);
-  await expect(page.locator('.hero-kicker, .hero-project-note, #services .section-heading p, #work .section-heading p, #contact .section-label')).toHaveCount(0);
+  await expect(page.locator('.hero-kicker, .hero-project-note, #services .section-heading p, #work .section-heading p, .section-label, .figure-topline, .figure-caption')).toHaveCount(0);
   await expect(page.locator('#services h2')).toHaveText('What I build.');
   await expect(page.locator('.service-card h3')).toHaveText(['AI automation', 'Private AI', 'Agent payments', 'Technical consulting']);
   await expect(page.locator('.service-card ul')).toHaveCount(0);
-  for (const link of await page.locator('.service-card > a').all()) await expect(link).toHaveAttribute('href', 'https://cal.com/sarthi');
-  await expect(page.locator('.contact-copy > p')).toContainText('engineering role');
-  await expect(page.locator('.brand-word')).toHaveText(['Sarthiii', 'Sarthiii']);
-  await expect(page.locator('.figure-topline, .figure-caption')).toHaveCount(0);
+  await expect(page.locator('.service-card > a')).toHaveCount(0);
+  await expect(page.locator('.contact-copy .button')).toHaveAttribute('href', 'https://cal.com/sarthi');
+  await expect(page.locator('.timeline-current .timeline-entry').nth(1)).toContainText('Ironvale');
+  await expect(page.locator('.timeline-current a[href="https://fundwise.fun"]')).toHaveCount(0);
   await expect(page.locator('.workflow-figure')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   await expect(page.locator('.figure-art')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(page.locator('.contact-copy > p')).toContainText('engineering role');
+  await expect(page.locator('.brand-word')).toHaveText(['Sarthiii', 'Sarthiii']);
 });
 
 test('workflow automatically moves through all three stages without controls', async ({ page }) => {

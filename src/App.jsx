@@ -58,7 +58,7 @@ export default function App() {
         <div className="od-stack hero-intro">
           <p className="hero-signature">Sarthi Borkar</p>
           <h1 id="hero-title"><span>Building for</span><span className="hero-title-serif">agents &amp; people.</span></h1>
-          <p className="hero-copy">I build AI tools, payment systems, and products people can use. My work connects product thinking with engineering across software, finance, and robotics.</p>
+          <p className="hero-copy">I turn ideas into working AI and payment products, from the first prototype to the details people use every day.</p>
           <div className="od-cluster hero-actions">
             <a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a>
             <a className="text-link" href="#work">View selected work <svg className="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a>
@@ -81,7 +81,6 @@ export default function App() {
 
   <section className="section services" id="services" aria-labelledby="services-title">
     <div className="container">
-      <p className="eyebrow section-label">01 / HOW I CAN HELP</p>
       <div className="section-heading" data-reveal>
         <h2 id="services-title">What I build.</h2>
       </div>
@@ -90,25 +89,21 @@ export default function App() {
           <div className="service-top"><span className="eyebrow">01 / AI SOLUTIONS</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#chip"/></svg></span></div>
           <h3>AI automation</h3>
           <p>Document workflows and internal tools connected to your systems.</p>
-          <a className="text-link" href="https://cal.com/sarthi">Discuss automation <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card service-card-sky" data-reveal>
           <div className="service-top"><span className="eyebrow">02 / PRIVATE AI</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#lock"/></svg></span></div>
           <h3>Private AI</h3>
           <p>Search company knowledge with control over access and hosting.</p>
-          <a className="text-link" href="https://cal.com/sarthi">Discuss private AI <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card service-card-yellow" data-reveal>
           <div className="service-top"><span className="eyebrow">03 / AGENT PAYMENTS<br />&amp; STABLECOINS</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#payment"/></svg></span></div>
           <h3>Agent payments</h3>
           <p>Paid tools for agents, stablecoin settlement, and transaction records.</p>
-          <a className="text-link" href="https://cal.com/sarthi">Discuss payments <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
         <article className="service-card" data-reveal>
           <div className="service-top"><span className="eyebrow">04 / CONSULTING</span><span className="service-symbol" aria-hidden="true"><svg className="icon"><use href="#path"/></svg></span></div>
           <h3>Technical consulting</h3>
           <p>A clear technical scope and a practical plan for your next build.</p>
-          <a className="text-link" href="https://cal.com/sarthi">Plan your project <svg className="icon" aria-hidden="true"><use href="#arrow-right"/></svg><span className="sr-only">on Cal.com</span></a>
         </article>
       </div>
     </div>
@@ -117,7 +112,6 @@ export default function App() {
   <section className="work-section" id="work" aria-labelledby="work-title">
     <div className="work-stage" id="work-stage">
       <div className="container">
-        <p className="eyebrow section-label">02 / SELECTED PROJECTS</p>
         <div className="section-heading">
           <h2 id="work-title">Selected work<span className="heading-period">.</span></h2>
         </div>
@@ -147,15 +141,14 @@ export default function App() {
   <section className="section about" id="about" aria-labelledby="about-title">
     <div className="container od-grid about-grid">
       <div className="od-stack about-intro" data-reveal>
-        <p className="eyebrow section-label">03 / EXPERIENCE</p>
         <h2 id="about-title">Product-minded.<br />Hands-on.</h2>
-        <p>I build AI and payment products. Head of Product at RouterLabs. Founder of Fundwise.</p>
+        <p>I build AI and payment products. Head of Product at RouterLabs. Founder of Ironvale.</p>
         <div className="about-fact"><svg className="icon" aria-hidden="true"><use href="#pin"/></svg> Based in Berlin, Germany</div>
       </div>
       <div>
         <ol className="timeline timeline-current" aria-label="Current roles">
           <li className="timeline-entry" data-reveal><span className="timeline-date">CURRENT</span><div className="od-stack timeline-body"><h3>Head of Product</h3><a className="timeline-company text-link" href="https://routerlabs.ai">RouterLabs <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div></li>
-          <li className="timeline-entry" data-reveal><span className="timeline-date">CURRENT</span><div className="od-stack timeline-body"><h3>Founder</h3><a className="timeline-company text-link" href="https://fundwise.fun">Fundwise <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div></li>
+          <li className="timeline-entry" data-reveal><span className="timeline-date">CURRENT</span><div className="od-stack timeline-body"><h3>Founder</h3><span className="timeline-company">Ironvale</span></div></li>
         </ol>
         <details className="experience-archive">
           <summary>More experience <span className="chapter-count">08</span><svg className="icon" aria-hidden="true"><use href="#plus"/></svg></summary>
