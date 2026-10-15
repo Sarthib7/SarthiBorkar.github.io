@@ -46,7 +46,7 @@ npm run verify
 ```
 
 VERIFIED: `playwright.config.js` starts a separate production preview on port 43187.
-`tests/site.spec.js` checks mobile navigation, workflow controls, reduced motion, keyboard access, and content without JavaScript.
+`tests/site.spec.js` checks mobile navigation, automatic workflow motion, cursor response, reduced motion, keyboard access, and content without JavaScript.
 The viewport check covers widths of 320, 390, 768, 1024, and 1440 pixels.
 Browser checks do not verify external booking pages or linked GitHub projects.
 
@@ -62,7 +62,8 @@ VERIFIED: The earlier `main-index.html`, `index-retro90s.html`, root `CNAME`, an
 ## Workflow illustration
 
 VERIFIED: `src/WorkflowFigure.jsx` uses the generated `src/workflow-art.svg`.
-Its controls select collection, processing, or delivery and move the scan carriage.
+Its carriage moves through collection, processing, and delivery automatically. The active tray lifts, and the diagram tilts with the cursor.
+Reduced motion keeps the diagram static. Without JavaScript, the illustration remains visible.
 This is a conceptual workflow illustration, not a performance measurement.
 
 VERIFIED: `scripts/generate-workflow.mjs` imports the installed Anatomy kit.
