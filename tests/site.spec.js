@@ -238,6 +238,7 @@ test('each featured project has loaded local artwork', async ({ page }) => {
 
 test('FalconOS, Fundwise, and LastLight use moving Anatomy mechanisms with a static reduced-motion view', async ({ page }) => {
   await openApp(page);
+  await expect(page.locator('#hero-title')).toHaveText('Building foragents & people.');
   const covers = page.locator('.work-card .project-visual');
   await expect(covers.nth(0)).toHaveAttribute('src', './assets/projects/falconos.svg');
   await expect(covers.nth(1)).toHaveAttribute('src', './assets/projects/fundwise.svg');

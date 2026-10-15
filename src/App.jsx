@@ -12,7 +12,7 @@ export default function App() {
     <>
 <svg className="symbol-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <symbol id="brand-s" viewBox="0 0 40 40"><path d="M29 9H16l-7 7 20 9-7 7H9" fill="none" stroke="currentColor" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round"/></symbol>
+    <symbol id="brand-s" viewBox="0 0 40 40"><path d="M9 19h4v12H9zm9-5h4v17h-4zm9 5h4v12h-4z" fill="currentColor"/><circle cx="11" cy="12" r="2" fill="currentColor"/><circle cx="20" cy="7" r="2" fill="currentColor"/><circle cx="29" cy="12" r="2" fill="currentColor"/></symbol>
     <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
     <symbol id="arrow-left" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
     <symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol>
@@ -57,7 +57,7 @@ export default function App() {
       <div className="od-grid hero-grid">
         <div className="od-stack hero-intro">
           <p className="hero-signature">Sarthi Borkar</p>
-          <h1 id="hero-title"><span>Engineering for</span><span className="hero-title-serif">agents &amp; people.</span></h1>
+          <h1 id="hero-title"><span>Building for</span><span className="hero-title-serif">agents &amp; people.</span></h1>
           <p className="hero-copy">I build AI tools, payment systems, and products people can use. My work connects product thinking with engineering across software, finance, and robotics.</p>
           <div className="od-cluster hero-actions">
             <a className="button button-primary" href="https://cal.com/sarthi">Discuss a project <svg className="icon" aria-hidden="true"><use href="#external"/></svg><span className="sr-only">on Cal.com</span></a>
@@ -174,7 +174,7 @@ export default function App() {
     </div>
   </section>
 
-  <aside className="working-note"><div className="container"><p className="working-note-title">A product partner.<br />An engineer on the details.</p><div><p>For a focused build, a technical collaboration, or an engineering role.</p><div className="working-note-links"><a className="text-link" href="https://github.com/Sarthib7">GitHub <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://linkedin.com/in/sarthiborkar">LinkedIn <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://cal.com/sarthi">Talk with me <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div></div></div></aside>
+  <aside className="working-note"><div className="container"><p className="working-note-title">A product partner.<br />An engineer on the details.</p><div><p>For a focused build, a technical collaboration, or an engineering role.</p><div className="working-note-links"><a className="text-link" href="https://github.com/Sarthib7">GitHub <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://www.linkedin.com/in/sarthib7/">LinkedIn <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a><a className="text-link" href="https://cal.com/sarthi">Talk with me <svg className="icon" aria-hidden="true"><use href="#external"/></svg></a></div></div></div></aside>
 
   <section className="section contact" id="contact" aria-labelledby="contact-title">
     <div className="container od-grid contact-grid" data-reveal>
